@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Poa Floripa Imóveis — Imóveis de Alto Padrão em Porto Alegre e Florianópolis</title>
-  <meta name="description" content="Curadoria exclusiva para quem busca sofisticação, localização privilegiada e qualidade de vida em Porto Alegre e Florianópolis. Exclusivo para venda." />
+  <title>Poa Floripa Imóveis | Médio e Alto Padrão em POA e Floripa</title>
+  <meta name="description" content="Curadoria imobiliária de imóveis de médio e alto padrão em Porto Alegre e Florianópolis. Assessoria especializada, exclusivo para venda." />
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -27,7 +27,8 @@
               DEFAULT: '#00B4D8',   /* Azul Piscina Principal */
               secondary: '#007791', /* Cor Secundária Compatível (Azul Oceânico Sóbrio) */
               deep: '#072A36',      /* Petróleo Profundo */
-              abyss: '#041B24'
+              abyss: '#041B24',
+              bar: '#12B8D8'        /* Azul Piscina Claro — exclusivo da barra superior (D-02) */
             },
             brand: {
               red: '#D62828'        /* Vermelho original da casinha do logo */
@@ -54,6 +55,11 @@
       --pool-primary: #00B4D8;
       --pool-secondary: #007791;
       --pool-deep: #072A36;
+      /* Barra superior — azul piscina claro (escopo: barra apenas, D-02) */
+      --pool-bar-start: #14BBDC;
+      --pool-bar: #12B8D8;
+      --pool-bar-end: #0E9CC4;
+      --pool-bar-ink: #072A36;
     }
 
     body {
@@ -64,17 +70,18 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Barra Superior em Azul Piscina (#00B4D8) + Secundária (#007791) com estética minimalista */
+    /* Barra Superior em Azul Piscina Claro (D-02/D-03) com texto petróleo para contraste AA */
     .header-pool-minimal {
-      background: linear-gradient(90deg, #00B4D8 0%, #0099BA 55%, #007791 100%);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+      background: linear-gradient(90deg, var(--pool-bar-start) 0%, var(--pool-bar) 55%, var(--pool-bar-end) 100%);
+      border-bottom: 1px solid rgba(7, 42, 54, 0.14);
       transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .header-pool-minimal.scrolled {
-      background: rgba(0, 145, 178, 0.96);
+      background: rgba(16, 169, 210, 0.96);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      box-shadow: 0 8px 28px -12px rgba(7, 42, 54, 0.22);
+      border-bottom-color: rgba(7, 42, 54, 0.2);
+      box-shadow: 0 8px 28px -12px rgba(7, 42, 54, 0.28);
     }
 
     /* Efeito 1: Imagens em Movimento Suave (Ken Burns — Ponte de Floripa e Orla de POA) */
@@ -127,7 +134,7 @@
       transform: scale(1.045);
     }
 
-    /* Link Hover Sublinhado Minimalista */
+    /* Link Hover Sublinhado Minimalista (herda a cor do texto do contexto) */
     .minimal-nav-link {
       position: relative;
     }
@@ -138,12 +145,16 @@
       bottom: -4px;
       width: 0%;
       height: 1px;
-      background-color: #FFFFFF;
+      background-color: currentColor;
       transition: width 0.3s ease;
     }
     .minimal-nav-link:hover::after,
     .minimal-nav-link.active::after {
       width: 100%;
+    }
+    .minimal-nav-link:focus-visible {
+      outline: 2px solid var(--pool-bar-ink);
+      outline-offset: 3px;
     }
 
     /* Mosaico de 5 Fotos estilo Auxiliadora Predial (No Modal do Imóvel) */
@@ -193,15 +204,16 @@
 <body class="selection:bg-pool selection:text-white">
 
   <!-- =========================================================================
-       BARRA SUPERIOR MINIMALISTA EM AZUL PISCINA (#00B4D8) E SECUNDÁRIA (#007791)
+       BARRA SUPERIOR MINIMALISTA EM AZUL PISCINA CLARO (#12B8D8)
        Estrutura limpa inspirada em fernandasardaimoveis.com.br:
        Logo original à esquerda + Links tipográficos puros + Telefone direto
+       Texto petróleo (#072A36) sobre a barra clara — contraste AA (6,37:1)
        ========================================================================= -->
-  <header id="mainHeader" class="fixed top-0 left-0 right-0 z-40 header-pool-minimal text-white">
+  <header id="mainHeader" class="fixed top-0 left-0 right-0 z-40 header-pool-minimal text-pool-deep">
     <div class="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between gap-6">
 
       <!-- LOGO ORIGINAL DO ARQUIVO HTML ("Poa [Casinha Vermelha] Floripa Imóveis") -->
-      <a href="#" onclick="resetAllFilters(); return false;" class="group flex items-center focus:outline-none" title="Poa Floripa Imóveis — Página Inicial">
+      <a href="#" onclick="resetAllFilters(); return false;" class="group flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-pool-deep focus-visible:ring-offset-2 focus-visible:ring-offset-pool-bar rounded-sm" title="Poa Floripa Imóveis — Página Inicial">
         <div class="flex items-center bg-white px-3.5 py-2 rounded-sm shadow-sm transition-transform duration-300 group-hover:scale-[1.01]">
           <span class="font-serif font-bold text-xl sm:text-2xl tracking-tight text-pool-deep">Poa</span>
           <span class="mx-1.5 inline-flex items-center justify-center w-6 h-6 rounded-sm bg-brand-red text-white" aria-hidden="true">
@@ -214,19 +226,16 @@
         </div>
       </a>
 
-      <!-- MENU MINIMALISTA (Exatamente como fernandasardaimoveis.com.br: Página Inicial | Explorar Imóveis de Luxo | Imóveis Selecionados | Contato) -->
-      <nav class="hidden lg:flex items-center gap-8 text-[13px] font-normal tracking-wide text-white/95">
+      <!-- MENU MINIMALISTA (Página inicial | Imóveis Selecionados | Sobre Nós | Contato) -->
+      <nav class="hidden lg:flex items-center gap-8 text-[13px] font-normal tracking-wide text-pool-deep">
         <a href="#" onclick="resetAllFilters(); return false;" id="navLinkHome" class="minimal-nav-link active py-1">
           Página inicial
         </a>
-        <button onclick="openCatalogDrawer()" class="minimal-nav-link py-1 text-left">
-          Explorar Imóveis de Luxo
-        </button>
         <a href="#imoveisSelecionados" class="minimal-nav-link py-1">
           Imóveis Selecionados
         </a>
         <a href="#quemSomos" class="minimal-nav-link py-1">
-          Curadoria
+          Sobre Nós
         </a>
         <a href="#contatoSection" class="minimal-nav-link py-1">
           Contato
@@ -235,11 +244,11 @@
 
       <!-- TELEFONE DIRETO DISCRETO + MENU MOBILE (Estilo Fernanda Sardá) -->
       <div class="flex items-center gap-5">
-        <a href="https://wa.me/5548999990240" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center gap-2 text-[13px] font-medium text-white hover:text-white/85 transition-opacity">
+        <a href="https://wa.me/5548999990240" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center gap-2 text-[13px] font-medium text-pool-deep hover:underline underline-offset-4 transition-colors rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-pool-deep">
           <i data-lucide="phone" class="w-3.5 h-3.5"></i>
           <span>(48) 99999-0240</span>
         </a>
-        <button onclick="openCatalogDrawer()" class="lg:hidden inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.14em] font-medium text-white border border-white/35 px-3 py-2 rounded-sm">
+        <button onclick="openCatalogDrawer()" class="lg:hidden inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.14em] font-medium text-pool-deep border border-pool-deep/35 px-3 py-2 rounded-sm hover:bg-pool-deep/10 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pool-deep">
           <i data-lucide="menu" class="w-4 h-4"></i>
           <span>Menu</span>
         </button>
@@ -284,11 +293,11 @@
         </div>
 
         <h1 class="font-serif text-4xl sm:text-6xl text-white font-normal tracking-tight leading-[1.08] max-w-3xl">
-          Imóveis de Alto Padrão em Porto Alegre e Florianópolis
+          Imóveis de Médio e Alto Padrão em Porto Alegre e Florianópolis
         </h1>
 
         <p class="mt-4 text-sm sm:text-base text-white/90 font-light max-w-xl leading-relaxed">
-          Curadoria exclusiva para quem busca sofisticação, localização privilegiada e qualidade de vida.
+          Curadoria imobiliária para quem busca sofisticação, localização privilegiada e qualidade de vida
         </p>
 
       </div>
@@ -341,6 +350,10 @@
               <option value="Cobertura">Coberturas</option>
               <option value="Apartamento">Apartamentos</option>
               <option value="Condomínio">Casas em Condomínio</option>
+              <option value="Casa">Casas</option>
+              <option value="Terreno">Terrenos</option>
+              <option value="Sala Comercial">Sala comercial</option>
+              <option value="Loja">Lojas</option>
             </select>
           </div>
 
@@ -436,29 +449,26 @@
 
   <!-- =========================================================================
        FAIXA DE CONSULTORIA PERSONALIZADA (Inspirada em fernandasardaimoveis.com.br:
-       "Quer encontrar seu próximo imóvel em Porto Alegre ou Florianópolis?")
+       "Quer encontrar seu próximo imóvel no Rio Grande do Sul ou Santa Catarina?")
        ========================================================================= -->
   <section class="bg-minimal-offwhite border-y border-minimal-border py-16">
     <div class="max-w-4xl mx-auto px-4 sm:px-8 text-center lag-item" data-lag="0.03">
       <h2 class="font-serif text-3xl sm:text-4xl text-minimal-ink font-normal">
-        Quer encontrar seu próximo imóvel em Porto Alegre ou Florianópolis?
+        Quer encontrar seu próximo imóvel no Rio Grande do Sul ou Santa Catarina?
       </h2>
       <p class="mt-3 text-sm sm:text-base text-minimal-muted font-light">
         Estamos à disposição para te orientar com curadoria e atendimento personalizado.
       </p>
-      <div class="mt-7 flex flex-wrap items-center justify-center gap-4">
+      <div class="mt-7 flex items-center justify-center">
         <button onclick="openPrivateVisitModal('Consultoria Personalizada — Porto Alegre & Florianópolis')" class="px-7 py-3.5 bg-pool hover:bg-pool-secondary text-white text-xs uppercase tracking-[0.18em] font-semibold transition-colors">
           Falar com Especialista
-        </button>
-        <button onclick="openCatalogDrawer()" class="px-7 py-3.5 bg-white hover:bg-minimal-offwhite text-minimal-ink border border-minimal-border text-xs uppercase tracking-[0.18em] font-medium transition-colors">
-          Explorar Acervo Completo
         </button>
       </div>
     </div>
   </section>
 
   <!-- =========================================================================
-       SEÇÃO "QUEM SOMOS / A CURADORIA" (Inspirada em "Quem é Fernanda Sardá!"
+       SEÇÃO "SOBRE NÓS" (Inspirada em "Quem é Fernanda Sardá!"
        + Mantendo os Itens Flutuantes e o Efeito de Scroll Atrasado)
        ========================================================================= -->
   <section id="quemSomos" class="py-20 sm:py-28 bg-white overflow-hidden">
@@ -487,30 +497,11 @@
             Negócios Imobiliários
           </span>
           <h2 class="font-serif text-3xl sm:text-5xl text-minimal-ink font-normal mt-2 leading-tight">
-            Quem é Poa Floripa Imóveis
+            Sobre Nós
           </h2>
           <p class="mt-5 text-sm sm:text-base text-minimal-muted font-light leading-relaxed">
-            Somos uma assessoria especializada em imóveis de médio e alto padrão em <strong class="font-medium text-minimal-ink">Porto Alegre</strong> e <strong class="font-medium text-minimal-ink">Florianópolis</strong>. Nosso trabalho é baseado em curadoria, transparência e atendimento personalizado.
+            A Poa Floripa Imóveis é uma assessoria especializada em imóveis de médio e alto padrão, com atuação focada em Porto Alegre, Florianópolis e abrangência em todo o Rio Grande do Sul e Santa Catarina. Nosso trabalho vai além da intermediação tradicional: unimos uma curadoria rigorosa das melhores oportunidades do mercado à total transparência e ao respaldo de uma assessoria jurídica de confiança em cada etapa. Oferecemos um atendimento personalizado, desenhado para entender o estilo de vida e os objetivos de investimento de cada cliente, garantindo tranquilidade, segurança patrimonial e exclusividade do primeiro contato à entrega das chaves.
           </p>
-          <p class="mt-4 text-sm sm:text-base text-minimal-muted font-light leading-relaxed">
-            Com experiência no mercado premium, ajudamos clientes a encontrarem imóveis exclusivamente para venda que unem localização privilegiada, conforto arquitetônico e sólida valorização patrimonial.
-          </p>
-
-          <!-- Os 3 pilares minimalistas (como no site de referência) -->
-          <ul class="mt-7 space-y-3 border-t border-minimal-border pt-6 text-sm text-minimal-ink">
-            <li class="flex items-center gap-3">
-              <span class="w-1.5 h-1.5 rounded-full bg-pool"></span>
-              <span>Atendimento 100% consultivo em Porto Alegre e Florianópolis</span>
-            </li>
-            <li class="flex items-center gap-3">
-              <span class="w-1.5 h-1.5 rounded-full bg-pool"></span>
-              <span>Foco em imóveis selecionados com apresentação fotográfica detalhada</span>
-            </li>
-            <li class="flex items-center gap-3">
-              <span class="w-1.5 h-1.5 rounded-full bg-pool"></span>
-              <span>Experiência comprovada no mercado de médio e alto padrão</span>
-            </li>
-          </ul>
         </div>
 
       </div>
