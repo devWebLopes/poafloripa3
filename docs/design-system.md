@@ -13,9 +13,10 @@
 
 ### Barra superior (D-02/D-03 — 18/11/2026)
 - Gradiente: `--pool-bar-start #14BBDC` → `--pool-bar #12B8D8` (55%) → `--pool-bar-end #0E9CC4`.
-- Texto/ícones: `--pool-bar-ink #072A36` (petróleo), substituindo o branco.
-- Contraste medido: 6,58:1 / 6,37:1 / 4,72:1 entre texto e cada parada do gradiente — AA para texto normal (≥ 4,5:1).
-- Estado `scrolled`: `rgba(16,169,210,0.96)` + blur + borda `rgba(7,42,54,0.2)`.
+- **Texto/ícones: brancos** (revisão de 18/11/2026, a pedido do solicitante — a versão com texto petróleo foi rejeitada visualmente).
+- Contraste medido com texto branco: 2,29:1 / 2,37:1 / 3,20:1 — **abaixo de AA**. É uma exceção aprovada pelo solicitante; `docs/code-standards.md` continua valendo para o restante do site.
+- Alternativa AA, se solicitada: escurecer a barra para ~`#07809B` (branco ≈ 4,5:1), o que reduz a percepção de azul claro.
+- Estado `scrolled`: `rgba(16,169,210,0.96)` + blur + borda `rgba(7,42,54,0.2)`; o foco de teclado usa outline petróleo para permanecer visível.
 - Escopo fechado: CTAs, links, rodapé e `pool-secondary` **não** foram alterados.
 - Sublinhado de hover/focus usa `currentColor`, acompanhando a cor do texto.
 

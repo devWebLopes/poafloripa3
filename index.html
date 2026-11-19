@@ -209,25 +209,27 @@
        Logo original à esquerda + Links tipográficos puros + Telefone direto
        Texto petróleo (#072A36) sobre a barra clara — contraste AA (6,37:1)
        ========================================================================= -->
-  <header id="mainHeader" class="fixed top-0 left-0 right-0 z-40 header-pool-minimal text-pool-deep">
+  <header id="mainHeader" class="fixed top-0 left-0 right-0 z-40 header-pool-minimal text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between gap-6">
 
-      <!-- LOGO ORIGINAL DO ARQUIVO HTML ("Poa [Casinha Vermelha] Floripa Imóveis") -->
-      <a href="#" onclick="resetAllFilters(); return false;" class="group flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-pool-deep focus-visible:ring-offset-2 focus-visible:ring-offset-pool-bar rounded-sm" title="Poa Floripa Imóveis — Página Inicial">
-        <div class="flex items-center bg-white px-3.5 py-2 rounded-sm shadow-sm transition-transform duration-300 group-hover:scale-[1.01]">
-          <span class="font-serif font-bold text-xl sm:text-2xl tracking-tight text-pool-deep">Poa</span>
-          <span class="mx-1.5 inline-flex items-center justify-center w-6 h-6 rounded-sm bg-brand-red text-white" aria-hidden="true">
-            <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 fill-current" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 3.2L2 12h3v8h6v-6h2v6h6v-8h3L12 3.2z"/>
-            </svg>
+      <!-- LOGO COMPOSTO: "POA + casinha + FLORIPA" com "IMÓVEIS" centralizado na 2ª linha -->
+      <a href="#" onclick="resetAllFilters(); return false;" class="group inline-flex focus:outline-none focus-visible:ring-2 focus-visible:ring-pool-deep focus-visible:ring-offset-2 focus-visible:ring-offset-pool-bar rounded-sm" title="Poa Floripa Imóveis — Página Inicial">
+        <span class="flex flex-col items-center bg-white px-3 pt-1.5 pb-1 rounded-sm shadow-sm transition-transform duration-300 group-hover:scale-[1.01]">
+          <span class="flex items-center">
+            <span class="font-serif font-bold text-xl sm:text-2xl leading-tight tracking-tight text-pool-deep">Poa</span>
+            <span class="mx-1.5 inline-flex items-center justify-center w-6 h-6 rounded-sm bg-brand-red text-white" aria-hidden="true">
+              <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 fill-current" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 3.2L2 12h3v8h6v-6h2v6h6v-8h3L12 3.2z"/>
+              </svg>
+            </span>
+            <span class="font-serif font-bold text-xl sm:text-2xl leading-tight tracking-tight text-pool-deep">Floripa</span>
           </span>
-          <span class="font-serif font-bold text-xl sm:text-2xl tracking-tight text-pool-deep">Floripa</span>
-          <span class="ml-1.5 text-[10px] font-sans uppercase tracking-[0.22em] text-pool-secondary font-semibold border-l border-minimal-border pl-2">Imóveis</span>
-        </div>
+          <span class="mt-0.5 ml-[0.22em] text-[10px] font-sans uppercase tracking-[0.22em] text-pool-secondary font-semibold leading-none">Imóveis</span>
+        </span>
       </a>
 
       <!-- MENU MINIMALISTA (Página inicial | Imóveis Selecionados | Sobre Nós | Contato) -->
-      <nav class="hidden lg:flex items-center gap-8 text-[13px] font-normal tracking-wide text-pool-deep">
+      <nav class="hidden lg:flex items-center gap-8 text-[13px] font-normal tracking-wide text-white/95">
         <a href="#" onclick="resetAllFilters(); return false;" id="navLinkHome" class="minimal-nav-link active py-1">
           Página inicial
         </a>
@@ -244,11 +246,11 @@
 
       <!-- TELEFONE DIRETO DISCRETO + MENU MOBILE (Estilo Fernanda Sardá) -->
       <div class="flex items-center gap-5">
-        <a href="https://wa.me/5548999990240" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center gap-2 text-[13px] font-medium text-pool-deep hover:underline underline-offset-4 transition-colors rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-pool-deep">
+        <a href="https://wa.me/5548999990240" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center gap-2 text-[13px] font-medium text-white hover:text-white/85 transition-colors rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-pool-deep">
           <i data-lucide="phone" class="w-3.5 h-3.5"></i>
           <span>(48) 99999-0240</span>
         </a>
-        <button onclick="openCatalogDrawer()" class="lg:hidden inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.14em] font-medium text-pool-deep border border-pool-deep/35 px-3 py-2 rounded-sm hover:bg-pool-deep/10 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pool-deep">
+        <button onclick="openCatalogDrawer()" class="lg:hidden inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.14em] font-medium text-white border border-white/35 px-3 py-2 rounded-sm hover:bg-white/10 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pool-deep">
           <i data-lucide="menu" class="w-4 h-4"></i>
           <span>Menu</span>
         </button>
@@ -509,6 +511,51 @@
   </section>
 
   <!-- =========================================================================
+       SEÇÃO EDITORIAL "DE PORTO ALEGRE A FLORIANÓPOLIS" (RF-08 / ALT-08)
+       D-07: texto sempre visível. D-09: depois de "Sobre Nós".
+       D-08: galeria pendente de fotos licenciadas (ver comentário no fim da seção).
+       ========================================================================= -->
+  <section id="duasCapitais" class="py-20 sm:py-28 bg-white border-t border-minimal-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+
+      <div class="max-w-4xl">
+        <span class="text-[11px] uppercase tracking-[0.22em] text-pool-secondary font-semibold">
+          Porto Alegre &amp; Florianópolis
+        </span>
+        <h2 class="font-serif text-3xl sm:text-4xl text-minimal-ink font-normal mt-2 leading-tight">
+          De Porto Alegre a Florianópolis: Duas Capitais, uma História de Qualidade de Vida
+        </h2>
+      </div>
+
+      <p class="mt-6 max-w-3xl text-base sm:text-lg text-minimal-ink font-light leading-relaxed">
+        A conexão entre Porto Alegre e Florianópolis vai muito além da proximidade geográfica — ela está escrita na própria origem das duas cidades. Ambas foram moldadas pelo espírito pioneiro e acolhedor dos colonizadores açorianos no século XVIII, que encontraram nas águas do Lago Guaíba e nas baías da Ilha de Santa Catarina o cenário perfeito para construir comunidades prósperas, vibrantes e intimamente ligadas à natureza.
+      </p>
+
+      <div class="mt-8 lg:mt-10 max-w-5xl grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 text-sm sm:text-base text-minimal-muted font-light leading-relaxed">
+        <p>
+          Com o passar dos séculos, cada capital desenvolveu sua própria vocação, criando uma complementaridade única no Sul do Brasil. Porto Alegre, fundada oficialmente em 1772 como o histórico Porto dos Casais, consolidou-se como uma metrópole dinâmica, referência em negócios, cultura, gastronomia e infraestrutura urbana. Seus bairros tradicionais, parques arborizados e a renovada Orla do Guaíba oferecem o equilíbrio ideal entre o ritmo cosmopolita e o bem-estar.
+        </p>
+        <p>
+          Florianópolis, por sua vez, transformou sua herança açoriana em um dos destinos mais desejados do país para viver e investir. Conhecida como a Ilha da Magia, une praias paradisíacas, segurança e alto índice de desenvolvimento humano a um polo tecnológico e de inovação em constante expansão, atraindo famílias e investidores em busca de qualidade de vida junto ao mar.
+        </p>
+      </div>
+
+      <p class="mt-8 lg:mt-10 max-w-3xl text-sm sm:text-base text-minimal-ink font-light leading-relaxed border-l-2 border-pool pl-5">
+        Hoje, o fluxo entre gaúchos e catarinenses é mais forte do que nunca — seja para morar, veranear ou diversificar investimentos imobiliários. Na Poa Floripa Imóveis, conhecemos profundamente a essência e as oportunidades desses dois mercados. Conectamos você às melhores opções de imóveis nas duas capitais para que você possa viver ou investir exatamente onde a sua história pedir.
+      </p>
+
+      <!--
+        GALERIA (D-08 / A-03) — inserir após receber as fotos licenciadas:
+        - 3 a 4 imagens de Porto Alegre e ~3 de Florianópolis (mínimo 2 de Florianópolis);
+        - WebP em assets/img/, com width, height, loading="lazy" e decoding="async";
+        - alt descritivo com o local correto; proibido usar imagens com marca do Google Lens;
+        - grid 1 coluna no mobile e composição editorial (lg:grid-cols-3) no desktop.
+      -->
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
        SEÇÃO "RECEBA NOVIDADES" (Minimalista como em fernandasardaimoveis.com.br)
        ========================================================================= -->
   <section id="contatoSection" class="bg-minimal-offwhite border-t border-minimal-border py-16">
@@ -555,15 +602,17 @@
   <footer class="bg-pool-abyss text-white/85 py-14 border-t border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 md:grid-cols-12 gap-10 pb-10 border-b border-white/10">
 
-      <!-- Coluna 1: Logo Original -->
+      <!-- Coluna 1: Marca (mesma composição do header, com "IMÓVEIS" centralizado) -->
       <div class="md:col-span-5">
-        <div class="inline-flex items-center bg-white px-3.5 py-2 rounded-sm">
-          <span class="font-serif font-bold text-lg text-pool-deep">Poa</span>
-          <span class="mx-1.5 inline-flex items-center justify-center w-5 h-5 rounded-sm bg-brand-red text-white">
-            <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 fill-current"><path d="M12 3.2L2 12h3v8h6v-6h2v6h6v-8h3L12 3.2z"/></svg>
+        <div class="inline-flex flex-col items-center bg-white px-3 pt-1.5 pb-1 rounded-sm">
+          <span class="flex items-center">
+            <span class="font-serif font-bold text-lg leading-tight text-pool-deep">Poa</span>
+            <span class="mx-1.5 inline-flex items-center justify-center w-5 h-5 rounded-sm bg-brand-red text-white">
+              <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 fill-current"><path d="M12 3.2L2 12h3v8h6v-6h2v6h6v-8h3L12 3.2z"/></svg>
+            </span>
+            <span class="font-serif font-bold text-lg leading-tight text-pool-deep">Floripa</span>
           </span>
-          <span class="font-serif font-bold text-lg text-pool-deep">Floripa</span>
-          <span class="ml-1.5 text-[10px] uppercase tracking-[0.2em] text-pool-secondary font-semibold border-l border-minimal-border pl-2">Imóveis</span>
+          <span class="mt-0.5 ml-[0.2em] text-[9px] uppercase tracking-[0.2em] text-pool-secondary font-semibold leading-none">Imóveis</span>
         </div>
         <p class="mt-4 text-xs text-white/60 max-w-sm leading-relaxed">
           Negócios Imobiliários — Imóveis de Médio e Alto Padrão exclusivamente para venda em Porto Alegre e Florianópolis.

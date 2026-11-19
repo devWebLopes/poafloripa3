@@ -99,13 +99,13 @@ Conforme o levantamento (seção 9, item 3): **não** expandir automaticamente "
 |---|---|---|---|
 | **D-01** | Qual é o arquivo final da marca (SVG ou PNG transparente, boa resolução)? O link do Gemini exige autenticação e a foto `WA0039` não serve para produção. | ALT-01 | **Sim** |
 | **D-02** | O novo azul vale só para a barra superior ou para todos os elementos azuis (CTAs, links, rodapé, `pool-secondary`)? | ALT-03 | **Sim** | **Resolvido (18/11/2026):** barra superior apenas. |
-| **D-03** | Qual o valor final aprovado do azul? Aceita-se texto escuro sobre barra clara (para manter contraste AA), ou a barra permanece com texto branco em tom mais escuro? | ALT-03 | **Sim** | **Resolvido (18/11/2026):** barra clara `#12B8D8` com texto petróleo `#072A36` (6,37:1). |
+| **D-03** | Qual o valor final aprovado do azul? Aceita-se texto escuro sobre barra clara (para manter contraste AA), ou a barra permanece com texto branco em tom mais escuro? | ALT-03 | **Sim** | **Resolvido (18/11/2026):** barra clara `#12B8D8` com texto branco (revisão a pedido do solicitante; contraste 2,37:1, abaixo de AA). |
 | **D-04** | O acesso ao catálogo (drawer) deve continuar existindo no desktop após remover o item de menu e o CTA? Se sim, por qual entrada? | ALT-02, ALT-05 | **Sim** (para aceite conjunto) |
 | **D-05** | O rótulo "Curadoria" do menu deve virar "Sobre Nós"? | ALT-07 | Não (executável em separado) |
 | **D-06** | Taxonomia final: "Casas" convive com "Casas em Condomínio"? "Sala comercial" ou "Salas comerciais"? Ordem das opções? | ALT-04 | Não (valores internos podem ser canônicos) |
-| **D-07** | A seção histórica abre com texto sempre visível ou sob clique? | ALT-08 | **Sim** |
-| **D-08** | Quantidade e composição final da galeria (mínimo 2 fotos de Florianópolis) e se haverá novas imagens além das 4 enviadas. | ALT-08 | **Sim** |
-| **D-09** | A nova seção entra depois de "Sobre Nós" (antes da newsletter) ou depois da newsletter (imediatamente antes do rodapé)? | ALT-08 | **Sim** |
+| **D-07** | A seção histórica abre com texto sempre visível ou sob clique? | ALT-08 | **Sim** | **Resolvido (18/11/2026):** texto sempre visível. |
+| **D-08** | Quantidade e composição final da galeria (mínimo 2 fotos de Florianópolis) e se haverá novas imagens além das 4 enviadas. | ALT-08 | **Sim** | **Parcial:** composição definida (3–4 POA + ~3 FLN), mas as fotos licenciadas ainda não chegaram. |
+| **D-09** | A nova seção entra depois de "Sobre Nós" (antes da newsletter) ou depois da newsletter (imediatamente antes do rodapé)? | ALT-08 | **Sim** | **Resolvido (18/11/2026):** depois de "Sobre Nós". |
 | **D-10** | Haverá item de menu apontando para a nova seção? | ALT-08 | Não |
 | **D-11** | Os textos institucionais ("assessoria jurídica de confiança", "segurança patrimonial", "exclusividade", IDH, segurança) foram validados jurídica e factualmente? | ALT-07, ALT-08 | **Sim** (gate de publicação) |
 | **D-12** | Qual telefone é "o atual" — o de Porto Alegre (51), o de Florianópolis (48) ou ambos? O header exibe apenas o 48. | ALT-09 | **Sim** (para o aceite de consistência) |
@@ -129,12 +129,12 @@ Conforme o levantamento (seção 9, item 3): **não** expandir automaticamente "
 - Header permanece legível sobre a barra (contraste) e não deve crescer além de `h-20` sem revisão do `pt-20` do hero.
 
 **Aceite:**
-- [ ] "IMÓVEIS" centralizado sob o conjunto, no header e no rodapé.
-- [ ] Marca legível em 375, 768 e 1280 px, sem corte nem deformação.
-- [ ] Nome acessível presente; link da marca continua resetando filtros.
-- [ ] Header não sobrepõe o hero (sem regressão de `pt-20`).
+- [x] "IMÓVEIS" centralizado sob o conjunto, no header e no rodapé. *(composição provisória em 18/11/2026)*
+- [x] Marca legível em 375, 768 e 1280 px, sem corte nem deformação.
+- [x] Nome acessível presente; link da marca continua resetando filtros.
+- [x] Header não sobrepõe o hero (sem regressão de `pt-20`).
 
-**Dependência:** D-01 (bloqueante).
+**Dependência:** D-01 (bloqueante para o uso do arquivo final).
 
 ---
 
@@ -291,11 +291,11 @@ Conforme o levantamento (seção 9, item 3): **não** expandir automaticamente "
 - Posição conforme D-09; sem item de menu obrigatório (D-10).
 
 **Aceite:**
-- [ ] Seção presente na posição aprovada, com título e 4 parágrafos literais.
+- [x] Seção presente na posição aprovada, com título e 4 parágrafos literais. *(18/11/2026)*
 - [ ] Galeria com a distribuição mínima acordada e identificação correta.
 - [ ] Imagens licenciadas, sem marcas de ferramenta, com `alt`.
-- [ ] Interação (se houver) acessível e sem erros de console.
-- [ ] Legível em 375 px sem bloco denso.
+- [x] Interação (se houver) acessível e sem erros de console. *(não há interação: texto sempre visível)*
+- [x] Legível em 375 px sem bloco denso. *(18/11/2026)*
 - [ ] Fatos históricos e alegações validados (D-11).
 
 **Dependências:** D-07, D-08, D-09, D-11 (bloqueantes) + ativos de imagem licenciados.
@@ -377,8 +377,8 @@ Conforme o levantamento (seção 9, item 3): **não** expandir automaticamente "
 
 - **Onda 1 — Conteúdo e filtros (sem dependências):** RF-05, RF-06, RF-04, RF-07, RF-09. ✅ executada em 18/11/2026 (com RF-02, RF-10 e D-04/D-05).
 - **Onda 2 — Navegação e cor (após D-02/D-03/D-04):** RF-02, RF-03, RF-10. ✅ executada em 18/11/2026.
-- **Onda 3 — Marca (após D-01):** RF-01. ⛔ aguardando o arquivo da marca.
-- **Onda 4 — Seção editorial (após D-07/D-08/D-09/D-11 e ativos):** RF-08. ⛔ bloqueada.
+- **Onda 3 — Marca (após D-01):** RF-01. ✅ executada em 18/11/2026 com composição em código (ativo final pendente).
+- **Onda 4 — Seção editorial (após D-07/D-08/D-09/D-11 e ativos):** RF-08. 🟡 texto publicado em 18/11/2026; galeria bloqueada pelas fotos (A-03).
 
 ---
 
@@ -388,7 +388,7 @@ Conforme o levantamento (seção 9, item 3): **não** expandir automaticamente "
 |---|---|---|---|
 | A-01 | Marca em SVG ou PNG com transparência, alta resolução, versão final aprovada | RF-01 | **Aguardando envio** (solicitante vai fornecer) |
 | A-02 | Confirmação do hex final + escopo de aplicação | RF-03 | **Resolvido** (`#12B8D8`, barra apenas) |
-| A-03 | 3–4 fotos de Porto Alegre e ~3 de Florianópolis, licenciadas, sem marca d'água | RF-08 | **Ausente/parcial** (4 referências, 2 com marca do Google Lens e licença desconhecida) |
+| A-03 | 3–4 fotos de Porto Alegre e ~3 de Florianópolis, licenciadas, sem marca d'água | RF-08 | **Bloqueante** (4 referências recebidas, 2 com marca do Google Lens e licença desconhecida) |
 | A-04 | Definição de layout da seção histórica | RF-08 | **Ausente** |
 | A-05 | Validação jurídica e factual dos textos | RF-07, RF-08 | **Ausente** |
 | A-06 | Confirmação de qual telefone é o vigente | RF-09 | **Parcial** |
@@ -483,6 +483,6 @@ Base: `skills/qa-validacao-web.md`.
 
 1. ~~Tiago/Evandro respondem D-01 a D-04 (bloqueantes)~~ — D-02, D-03 e D-04 respondidas em 18/11/2026; **D-01 pendente** (arquivo da marca).
 2. Aprovação ou ajuste deste PRD.
-3. Execução de [tasks.md](../tasks.md) — Onda 1 e Onda 2 concluídas; 8 tasks gated restantes (G2, G3).
+3. Execução de [tasks.md](../tasks.md) — Ondas 1, 2 e 3 concluídas e Onda 4 parcialmente concluída; restam o ativo da marca e as fotos da galeria.
 4. Execução por ondas, com validação QA ao final de cada uma.
 5. Deploy somente após aprovação explícita (regra 8 do `agents.md`).

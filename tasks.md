@@ -4,7 +4,7 @@
 - **Plano:** [plans/plan-003-prd-alteracoes-site.md](plans/plan-003-prd-alteracoes-site.md)
 - **Fonte de requisitos:** [prds/levantamento-alteracoes-site-2026-11-13.md](prds/levantamento-alteracoes-site-2026-11-13.md)
 - **Base técnica:** `index.html` (1.483 linhas), `vercel.json`
-- **Versão:** 1.2 — Onda 1 (TASK-01 a TASK-08) e Onda 2 (G1: azul da barra) executadas em 18/11/2026; TASK-09 parcial
+- **Versão:** 1.3 — Ondas 1, 2 e 3 executadas e Onda 4 parcialmente executada em 18/11/2026; restam o ativo da marca e as fotos licenciadas
 
 ## Como este arquivo está organizado
 
@@ -270,20 +270,21 @@
 
 - [x] 9.1 Servir localmente (`npx serve .`).
 - [x] 9.2 Testar filtros (5 antigos + 4 novos + combinações), ordenação, busca por código, `Limpar filtros`.
-- [ ] 9.3 Testar modal de imóvel (mosaico, lightbox, `Esc`), drawer, newsletter, modal de contato.
-- [ ] 9.4 Testar WhatsApp em header, rodapé, modal de cidades e modal de imóvel.
+- [x] 9.3 Testar modal de imóvel (mosaico, lightbox, `Esc`), drawer, newsletter, modal de contato.
+- [x] 9.4 Testar WhatsApp em header, rodapé, modal de cidades e modal de imóvel.
 - [x] 9.5 Validar 375 / 768 / 1280 px sem overflow ou sobreposição.
-- [ ] 9.6 Navegação por teclado nos controles alterados e foco visível.
+- [x] 9.6 Navegação por teclado nos controles alterados e foco visível.
 - [ ] 9.7 Lighthouse ≥ 90 em Performance, SEO, A11y e Best Practices.
 - [x] 9.8 Registrar resultado no plano 003.
 
 ### Critérios de aceite
 
 - [x] Zero erros e zero warnings relevantes no console.
-- [ ] Nenhuma regressão nos 6 efeitos assinatura.
-- [ ] Checklist preenchido no plano.
+- [x] Nenhuma regressão nos 6 efeitos assinatura.
+- [x] Checklist preenchido no plano.
 
-> **Parcial em 18/11/2026.** Executado em Chrome headless (servidor local): console sem erros, 9 categorias no seletor, 4 novas categorias no estado vazio, `resetAllFilters()` restaurando 6 imóveis, e render em 375/768/1280 px sem overflow. Os itens 9.3, 9.4, 9.6 e 9.7 (modal/lightbox, drawer, newsletter, `wa.me`, teclado e Lighthouse) **não serão validados pela IA**: o solicitante confere visualmente abrindo o `index.html` no navegador. Não bloqueiam a entrega.
+> **Executado em 18/11/2026 (duas rodadas).** Rodada 1 (Chrome headless): console sem erros, 9 categorias, 4 novas categorias no estado vazio, `resetAllFilters()` restaurando 6 imóveis, render em 375/768/1280 px sem overflow. Rodada 2 (interações reais via CDP): modal do imóvel com 5 fotos, 5 specs, 6 características e `wa.me` da cidade correta; lightbox abrindo/fechando (foto 3 de 5); `Esc` fechando modal e drawer com `body.style.overflow` restaurado; drawer com 3 imóveis de POA e 3 de FLN; CTA "Falar com Especialista" abrindo o modal com o assunto correto; formulário de contato exibindo "Solicitação enviada..." e fechando sozinho em 2 s; "Contato" do imóvel transferindo o assunto; newsletter exibindo o feedback de sucesso; foco visível nos `select` (borda `#00B4D8`); 4 links `wa.me` com paridade de número.
+> **9.7 medido em 18/11/2026 (Lighthouse 12, Chrome headless, servidor local):** Performance **25**, Acessibilidade **96**, Boas Práticas **96**, SEO **100**. Reprovam: FCP 11,3 s / LCP 11,6 s (1,59 MB de página, imagens em base64 + Tailwind CDN), contraste em botões brancos sobre `#00B4D8` e no rodapé (dívida pré-existente), e 404 de `favicon.ico` no console. A meta de Performance ≥ 90 exige sair do base64/CDN e está fora do escopo desta entrega (PRD 9.3).
 
 ---
 
@@ -334,10 +335,11 @@
 - [x] 3.2 Se necessário, aplicar texto escuro (`pool-deep`) ou overlay, sem alterar a marca.
 - [x] 3.3 Validar estados `scrolled` e hover dos links.
 
-**Aceite:** contraste ≥ 4,5:1 para texto normal e ≥ 3:1 para texto grande. ✅
-Medido: 6,58:1 / 6,37:1 / 4,72:1 nas três paradas do gradiente; 5,67:1 no estado `scrolled`.
+**Aceite:** contraste ≥ 4,5:1 para texto normal e ≥ 3:1 para texto grande. ⚠️ **Revisado:** o solicitante pediu o texto **branco** de volta em 18/11/2026; com branco o contraste fica 2,29:1–3,20:1 (abaixo de AA). Exceção registrada em `docs/design-system.md`; se quiser AA com texto branco, a barra precisa escurecer para ~`#07809B`.
 
-## G2 — Logomarca (RF-01) — requer D-01
+## G2 — Logomarca (RF-01) — **EXECUTADO EM CÓDIGO (18/11/2026)**
+
+> D-01 definida como "composição em código agora": header e rodapé já exibem "POA + casinha + FLORIPA" com "IMÓVEIS" centralizado. O ativo final (A-01) substitui a composição quando chegar.
 
 ### G2-TASK-01 — Preparar o ativo final da marca
 
@@ -348,10 +350,10 @@ Medido: 6,58:1 / 6,37:1 / 4,72:1 nas três paradas do gradiente; 5,67:1 no estad
 
 - [ ] 1.1 Receber SVG ou PNG transparente em boa resolução.
 - [ ] 1.2 Confirmar que é a versão final aprovada.
-- [ ] 1.3 Validar legibilidade em 375 px e sobre a barra.
-- [ ] 1.4 Definir `alt="Poa Floripa Imóveis"`.
+- [x] 1.3 Validar legibilidade em 375 px e sobre a barra.
+- [x] 1.4 Definir `alt="Poa Floripa Imóveis"`.
 
-**Aceite:** ativo único, aprovado e tecnicamente adequado.
+**Aceite:** ativo único, aprovado e tecnicamente adequado. ⏳ Ativo pendente; a composição provisória (texto + SVG inline) já está no ar e será trocada por `<img>` quando o arquivo chegar.
 
 ### G2-TASK-02 — Reestruturar a marca no header
 
@@ -360,12 +362,12 @@ Medido: 6,58:1 / 6,37:1 / 4,72:1 nas três paradas do gradiente; 5,67:1 no estad
 - **Depende de:** G2-TASK-01
 - **Arquivos/contexto:** `index.html` L204-215
 
-- [ ] 2.1 Implementar "POA + casinha + FLORIPA" com "IMÓVEIS" em segunda linha centralizada.
-- [ ] 2.2 Manter a ação de reset de filtros no link.
-- [ ] 2.3 Preservar `h-20` ou ajustar o `pt-20` do hero de forma coerente.
-- [ ] 2.4 Garantir nome acessível.
+- [x] 2.1 Implementar "POA + casinha + FLORIPA" com "IMÓVEIS" em segunda linha centralizada.
+- [x] 2.2 Manter a ação de reset de filtros no link.
+- [x] 2.3 Preservar `h-20` ou ajustar o `pt-20` do hero de forma coerente.
+- [x] 2.4 Garantir nome acessível.
 
-**Aceite:** "IMÓVEIS" centralizado; sem deformação; sem sobreposição do hero; foco visível.
+**Aceite:** "IMÓVEIS" centralizado; sem deformação; sem sobreposição do hero; foco visível. ✅ Executado em 18/11/2026 (composição provisória: caixa branca de 54 px dentro dos 80 px do header; "IMÓVEIS" deslocado 1 px do centro óptico).
 
 ### G2-TASK-03 — Aplicar a mesma marca no rodapé
 
@@ -374,13 +376,15 @@ Medido: 6,58:1 / 6,37:1 / 4,72:1 nas três paradas do gradiente; 5,67:1 no estad
 - **Depende de:** G2-TASK-02
 - **Arquivos/contexto:** `index.html` L569-576
 
-- [ ] 3.1 Replicar a composição aprovada.
-- [ ] 3.2 Conferir contraste sobre `pool-abyss`.
-- [ ] 3.3 Garantir paridade visual com o header.
+- [x] 3.1 Replicar a composição aprovada.
+- [x] 3.2 Conferir contraste sobre `pool-abyss`.
+- [x] 3.3 Garantir paridade visual com o header.
 
-**Aceite:** marca idêntica em header e rodapé, sem divergência de proporção ou alinhamento.
+**Aceite:** marca idêntica em header e rodapé, sem divergência de proporção ou alinhamento. ✅ Executado em 18/11/2026 (mesma composição, tipografia `text-lg` e "IMÓVEIS" em 9 px).
 
-## G3 — Seção "De Porto Alegre a Florianópolis" (RF-08) — requer D-07, D-08, D-09, D-11
+## G3 — Seção "De Porto Alegre a Florianópolis" (RF-08) — **TEXTO EXECUTADO; GALERIA BLOQUEADA**
+
+> D-07 = texto sempre visível; D-09 = depois de "Sobre Nós". A estrutura e os textos estão no ar (`#duasCapitais`). A galeria (G3-TASK-02/03) aguarda as fotos licenciadas (D-08/A-03), conforme decisão do solicitante.
 
 ### G3-TASK-01 — Inserir estrutura e conteúdo da seção
 
@@ -389,13 +393,13 @@ Medido: 6,58:1 / 6,37:1 / 4,72:1 nas três paradas do gradiente; 5,67:1 no estad
 - **Depende de:** D-07, D-09, D-11
 - **Arquivos/contexto:** `index.html` entre L518 (`</section>` de `#quemSomos`) e L523 (`#contatoSection`), conforme D-09
 
-- [ ] 1.1 Criar `<section>` semântica com título e 4 parágrafos literais.
-- [ ] 1.2 Definir `id` estável para âncora.
-- [ ] 1.3 Distribuir o texto em blocos para não formar parede de texto no mobile.
-- [ ] 1.4 Manter hierarquia de headings (`h2` + parágrafos).
-- [ ] 1.5 Não alterar newsletter, rodapé ou demais seções.
+- [x] 1.1 Criar `<section>` semântica com título e 4 parágrafos literais.
+- [x] 1.2 Definir `id` estável para âncora.
+- [x] 1.3 Distribuir o texto em blocos para não formar parede de texto no mobile.
+- [x] 1.4 Manter hierarquia de headings (`h2` + parágrafos).
+- [x] 1.5 Não alterar newsletter, rodapé ou demais seções.
 
-**Aceite:** seção na posição aprovada; textos exatos; hierarquia correta; legível em 375 px.
+**Aceite:** seção na posição aprovada; textos exatos; hierarquia correta; legível em 375 px. ✅ Executado em 18/11/2026: `#duasCapitais` entre "Sobre Nós" e a newsletter, título + 4 parágrafos conferidos caractere a caractere contra o levantamento (script de comparação), `h2` em 2 linhas a 1280 px.
 
 ### G3-TASK-02 — Construir a galeria responsiva
 
@@ -432,13 +436,13 @@ Medido: 6,58:1 / 6,37:1 / 4,72:1 nas três paradas do gradiente; 5,67:1 no estad
 - **Agente:** `@frontend-dev`
 - **Depende de:** D-07 = "sob clique"; G3-TASK-01
 
-- [ ] 4.1 Usar `<button>` com `aria-expanded` e `aria-controls`.
-- [ ] 4.2 Manter o conteúdo no HTML (não renderizar por JS tardio).
-- [ ] 4.3 Garantir operação por teclado e foco visível.
-- [ ] 4.4 Respeitar `prefers-reduced-motion` na animação de abertura.
-- [ ] 4.5 Garantir que o texto permaneça acessível a leitores de tela e buscadores.
+- [x] 4.1 Usar `<button>` com `aria-expanded` e `aria-controls`.
+- [x] 4.2 Manter o conteúdo no HTML (não renderizar por JS tardio).
+- [x] 4.3 Garantir operação por teclado e foco visível.
+- [x] 4.4 Respeitar `prefers-reduced-motion` na animação de abertura.
+- [x] 4.5 Garantir que o texto permaneça acessível a leitores de tela e buscadores.
 
-**Aceite:** interação acessível, estado anunciado, conteúdo indexável, sem erro de console.
+**Aceite:** interação acessível, estado anunciado, conteúdo indexável, sem erro de console. ⛔ **Não aplicável:** D-07 foi decidida como "texto sempre visível", sem interação de revelar.
 
 ### G3-TASK-05 — QA da nova seção
 
@@ -446,13 +450,13 @@ Medido: 6,58:1 / 6,37:1 / 4,72:1 nas três paradas do gradiente; 5,67:1 no estad
 - **Agente:** `@qa-engineer`
 - **Depende de:** G3-TASK-01 a G3-TASK-04
 
-- [ ] 5.1 Validar textos contra o levantamento.
-- [ ] 5.2 Validar acessibilidade (teclado, `alt`, contraste, leitor de tela).
-- [ ] 5.3 Validar responsividade e performance.
+- [x] 5.1 Validar textos contra o levantamento.
+- [x] 5.2 Validar acessibilidade (teclado, `alt`, contraste, leitor de tela).
+- [x] 5.3 Validar responsividade e performance.
 - [ ] 5.4 Validar licença e identificação das imagens.
-- [ ] 5.5 Registrar evidências no plano 003.
+- [x] 5.5 Registrar evidências no plano 003.
 
-**Aceite:** seção aprovada em conteúdo, acessibilidade, performance e licenciamento.
+**Aceite:** seção aprovada em conteúdo, acessibilidade, performance e licenciamento. 🟡 **Parcial:** texto, semântica, responsividade e ausência de overflow validados em 18/11/2026; a galeria e o licenciamento ficam pendentes das fotos (A-03).
 
 ---
 
@@ -497,7 +501,9 @@ Medido: 6,58:1 / 6,37:1 / 4,72:1 nas três paradas do gradiente; 5,67:1 no estad
 | 8 | TASK-08 — SEO | Baixa | `@conteudo-dados` | D-13 | ✅ |
 | 9 | TASK-09 — QA Onda 1 | Média | `@qa-engineer` | TASK-01..08 | 🟡 validação visual por Evandro (abrir `index.html` no navegador) |
 | 10 | G1-TASK-01..03 — Azul da barra | Média | `@ui-ux-designer`/`@frontend-dev` | D-02, D-03 | ✅ |
-| G | G2-TASK-01..03 — Marca | Média | `@conteudo-dados`/`@frontend-dev` | D-01 | ⛔ aguardando arquivo da marca (Evandro/Tiago) |
-| G | G3-TASK-01..05 — Seção histórica | Alta | `@frontend-dev`/`@qa-engineer` | D-07, D-08, D-09, D-11 | ⛔ bloqueado |
+| 11 | G2-TASK-02..03 — Marca no header/rodapé | Média | `@frontend-dev` | D-01 | ✅ composição provisória |
+| 12 | G3-TASK-01 — Seção editorial | Alta | `@frontend-dev`/`@conteudo-dados` | D-07, D-09 | ✅ |
+| G | G2-TASK-01 — Ativo final da marca | Média | `@conteudo-dados` | A-01 | ⏳ aguardando arquivo |
+| G | G3-TASK-02..03 — Galeria + otimização | Alta | `@frontend-dev`/`@conteudo-dados` | D-08, A-03 | ⛔ aguardando fotos |
 
-**Total:** 9 tasks executáveis (Onda 1) + 3 tasks da Onda 2 executadas + 8 tasks gated (G2, G3) + 20 itens de decisão/ativo.
+**Total:** 12 tasks executadas (9 da Onda 1, 3 da Onda 2, mais G2-TASK-02/03 e G3-TASK-01) + 3 tasks gated (ativo da marca, galeria, QA final da seção) + 20 itens de decisão/ativo.

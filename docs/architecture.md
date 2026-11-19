@@ -30,3 +30,5 @@ poaflorpia3/
 - Funções chamadas por `onclick` inline devem ser expostas em `window` ou migradas para `addEventListener`.
 - Tailwind CDN é aceitável para este escopo; se performance for crítica, migrar para build do Tailwind (decisão a registrar em plano).
 - Desde a Onda 1 de 13/11/2026 (PRD em `docs/prd-alteracoes-site-2026-11-13.md`), o **drawer do catálogo não tem entrada no desktop**: é aberto apenas pelo botão "Menu" (`lg:hidden`), no mobile. Decisão D-04 registrada no plano 003.
+- Desde 18/11/2026 existe a seção editorial `#duasCapitais` ("De Porto Alegre a Florianópolis") entre `#quemSomos` e `#contatoSection`, com texto sempre visível (D-07/D-09). A galeria entra quando as fotos licenciadas chegarem (D-08/A-03).
+- A marca do header e do rodapé é uma composição em texto + SVG inline ("Poa + casinha + Floripa", com "Imóveis" centralizado). O ativo final (SVG/PNG) substitui a composição sem mudar o layout.

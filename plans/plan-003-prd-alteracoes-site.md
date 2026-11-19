@@ -1,6 +1,6 @@
 # Plano 003 — PRD e backlog das alterações solicitadas em 13/11/2026
 
-- **Status:** Ondas 1 e 2 executadas em 18/11/2026; Onda 3 aguarda o arquivo da marca e a Onda 4 aguarda definições editoriais + fotos
+- **Status:** Ondas 1, 2 e 3 executadas e Onda 4 com texto publicado em 18/11/2026; restam o ativo final da marca, as fotos da galeria e o Lighthouse de Performance
 - **Agente líder:** Arquiteto ([agents/arquiteto.md](../agents/arquiteto.md))
 - **Apoio:** Conteúdo & Dados, Frontend, QA & Deploy
 - **Skills:** catalogo-imoveis, html-semantico-seo, tailwind-design-system, vanilla-js-modular, otimizacao-imagens, qa-validacao-web
@@ -31,7 +31,9 @@ Transformar o levantamento de 13/11/2026 em documentação de engenharia execut�
 - [x] Gerar `tasks.md` com decomposição atômica.
 - [x] Executar a Onda 1 (TASK-01 a TASK-08) e validar com `skills/qa-validacao-web.md` — **parcial** (falta QA manual de modal/drawer/newsletter, teclado e Lighthouse).
 - [x] Executar a Onda 2 (G1-TASK-01 a G1-TASK-03) com D-02 e D-03 fechadas.
-- [ ] Executar a Onda 3 (marca) após receber o ativo e a Onda 4 (seção editorial) após D-07/D-08/D-09/D-11 e fotos licenciadas.
+- [x] Executar a Onda 3 (G2) com a composição em código da marca.
+- [x] Executar a Onda 4 no que não depende de fotos (G3-TASK-01, texto sempre visível).
+- [ ] Concluir a galeria da Onda 4 (G3-TASK-02/03) quando as fotos licenciadas chegarem.
 
 ## Critérios de aceite
 
@@ -84,11 +86,20 @@ Transformar o levantamento de 13/11/2026 em documentação de engenharia execut�
 | Drawer (`openCatalogDrawer`) e modal (`openPrivateVisitModal`) | funções presentes; drawer acessível no mobile |
 | Responsivo 375 / 768 / 1280 px | sem overflow ou sobreposição nas seções alteradas |
 | Telefones/`wa.me` | paridade em todos os pontos; nenhum número novo |
+| Modal do imóvel (18/11, 2ª rodada) | 5 fotos no mosaico, 5 specs, 6 características, 3 parágrafos, `wa.me` da cidade correta |
+| Lightbox | abre na foto 3/5 com legenda correta e fecha por botão |
+| `Esc` em modal e drawer | fecha os dois e restaura `body.style.overflow` |
+| Drawer | 3 imóveis de POA + 3 de FLN |
+| CTA "Falar com Especialista" | abre o modal com o assunto "Consultoria Personalizada — Porto Alegre & Florianópolis" |
+| Formulário de contato | exibe "Solicitação enviada..." e fecha sozinho em 2 s |
+| "Contato" no modal do imóvel | fecha o imóvel e abre o contato com `Cód. 204810 — ...` |
+| Newsletter | feedback "Cadastro realizado com sucesso..." exibido |
+| Teclado | foco visível nos `select` (borda `#00B4D8`) |
 
 ### Pendências herdadas
 
 - **D-11 (G-02):** validação jurídica/factual do texto "Sobre Nós" antes de publicar.
-- **TASK-09:** validação visual manual fica a cargo do solicitante (abrir `index.html` no navegador e percorrer modal, drawer, newsletter, `wa.me` e teclado). Não é trabalho pendente da IA nem bloqueia a entrega.
+- **TASK-09:** 9.3, 9.4 e 9.6 concluídos por teste automatizado de interação em 18/11/2026; resta apenas o item 9.7 (Lighthouse), que depende da etapa de deploy.
 - **Ondas 2–4:** a Onda 2 (cor, D-02/D-03) foi executada em seguida; a marca (D-01) e a seção editorial (D-07/D-08/D-09/D-11 + imagens licenciadas) seguem bloqueadas.
 
 ## Registro de execução — Onda 2 (18/11/2026)
@@ -98,7 +109,7 @@ Transformar o levantamento de 13/11/2026 em documentação de engenharia execut�
 | ID | Decisão | Efeito |
 |---|---|---|
 | **D-02** | O novo azul vale **só para a barra superior**; CTAs, links, rodapé e `pool-secondary` permanecem `#00B4D8` / `#007791` | Escopo fechado; nenhuma outra superfície azul foi tocada |
-| **D-03** | Barra **clara** (`#12B8D8`) com texto **petróleo** (`#072A36`) | Contraste AA garantido sem escurecer o azul |
+| **D-03** | Barra **clara** (`#12B8D8`) com texto **petróleo** (`#072A36`) | Contraste AA garantido sem escurecer o azul — **revisado em 18/11/2026:** o solicitante pediu o texto **branco** de volta; a barra clara foi mantida e o contraste passou a 2,29:1–3,20:1 (abaixo de AA, exceção registrada) |
 | **D-01** | Sem arquivo da marca nesta rodada — o solicitante vai enviar o SVG/PNG | Onda 3 continua parada até o ativo chegar |
 
 ### Alterações em `index.html`
@@ -111,14 +122,18 @@ Transformar o levantamento de 13/11/2026 em documentação de engenharia execut�
 6. **Sublinhado de hover/active dos links:** `#FFFFFF` → `currentColor`, acompanhando a cor do texto; `focus-visible` com `outline` petróleo.
 7. **Hover do telefone:** troca de cor por sublinhado (`hover:underline`), evitando queda de contraste abaixo de AA.
 
+### Revisão pós-validação visual (18/11/2026)
+
+O solicitante rejeitou o texto petróleo na barra e pediu o **branco** de volta. Revertidos apenas os itens 5–7 (header, menu, telefone e botão "Menu" voltaram a `text-white`; sublinhado e `focus-visible` seguem com `currentColor`/petróleo para continuar visíveis). O gradiente claro e o token `pool.bar` foram mantidos. Consequência medida: contraste do texto branco cai para **2,29:1 / 2,37:1 / 3,20:1** nas paradas — abaixo de AA. Exceção aprovada pelo solicitante e documentada em `docs/design-system.md`.
+
 ### Evidências de QA (Chrome headless, servidor local, 18/11/2026)
 
 | Verificação | Resultado |
 |---|---|
 | Gradiente computado | `rgb(20,187,220) → rgb(18,184,216) → rgb(14,156,196)` |
-| Cor do texto na barra | `rgb(7,42,54)` em header, links, telefone e botão |
-| Contraste por parada do gradiente | 6,58:1 / 6,37:1 / 4,72:1 — AA para texto normal |
-| Contraste no estado `scrolled` | 5,67:1 |
+| Cor do texto na barra | `rgb(7,42,54)` na 1ª versão; **`rgb(255,255,255)` após a revisão de 18/11** |
+| Contraste por parada do gradiente | 6,58:1 / 6,37:1 / 4,72:1 com petróleo (AA); **2,29:1 / 2,37:1 / 3,20:1 com branco** (abaixo de AA, exceção aprovada) |
+| Contraste no estado `scrolled` | 5,67:1 com petróleo; ~2,3:1 com branco |
 | Hover nos links | cor preservada + sublinhado de 83 px (sem regressão de contraste) |
 | Foco por teclado (Tab) | foco visível no link da marca (anel petróleo de 2 px) |
 | Overflow horizontal | 0 em 375 / 768 / 1280 px |
@@ -129,10 +144,47 @@ Transformar o levantamento de 13/11/2026 em documentação de engenharia execut�
 
 ### Pendências herdadas
 
-- **G-04:** validação **visual** da barra clara pelo solicitante antes de qualquer deploy. Não bloqueia a entrega do código.
+- **G-04:** parcialmente resolvido — o solicitante viu a barra clara em produção e pediu o texto branco (feito). Falta apenas aprovar o resultado final antes do próximo deploy.
 - **D-01/Onda 3:** envio do arquivo final da marca (SVG/PNG transparente) para executar G2.
 - **D-07/D-08/D-09/D-11 + fotos licenciadas:** Onda 4 continua bloqueada.
 - **G-02:** textos institucionais seguem sem validação jurídica/factual.
+
+## Registro de execução — Ondas 3 e 4 (18/11/2026)
+
+### Decisões tomadas nesta execução
+
+| ID | Decisão | Efeito |
+|---|---|---|
+| **D-01** | Usar a composição em código agora (texto + SVG inline); trocar por `<img>` quando o arquivo chegar | G2-TASK-02/03 executadas; G2-TASK-01 segue aguardando A-01 |
+| **D-07** | Texto da seção editorial **sempre visível** | G3-TASK-04 (revelar por clique) não se aplica |
+| **D-08** | Galeria **aguarda fotos licenciadas** | G3-TASK-02/03 bloqueadas; nenhuma imagem improvisada foi publicada |
+| **D-09** | Seção **depois de "Sobre Nós"**, antes da newsletter | `#duasCapitais` inserida entre `#quemSomos` e `#contatoSection` |
+
+### Alterações em `index.html`
+
+1. **Marca (header):** caixa branca virou coluna — "Poa + casinha + Floripa" na primeira linha e "Imóveis" centralizada abaixo (compensação de `0.22em` do `letter-spacing`); 54 px de altura dentro dos 80 px do header.
+2. **Marca (rodapé):** mesma composição em escala menor (`text-lg` / 9 px), substituindo o rótulo lateral.
+3. **Nova seção `#duasCapitais`:** `section` semântica com eyebrow "Porto Alegre & Florianópolis", `h2` com o título literal, primeiro parágrafo em destaque, dois parágrafos em grade de 2 colunas no desktop e o fechamento com barra lateral petróleo.
+4. **Galeria:** bloco comentado no HTML com os requisitos de D-08/A-03 (quantidade, WebP, `width`/`height`, `loading`, `alt`, proibição de marcas de ferramenta). Nenhum `<img>` vazio foi deixado na página.
+
+### Evidências de QA
+
+| Verificação | Resultado |
+|---|---|
+| Texto literal (título + 4 parágrafos) | comparação automatizada contra `prds/levantamento-alteracoes-site-2026-11-13.md`: 5/5 idênticos |
+| Marca no header | caixa de 54 px em header de 81 px; "IMÓVEIS" a 1 px do centro óptico |
+| Marca no rodapé | mesma composição, sem divergência de alinhamento |
+| Posição da seção | `#duasCapitais` imediatamente antes de `#contatoSection` |
+| Hierarquia | `h2` próprio; 4 parágrafos visíveis sem interação |
+| Responsivo | 0 de overflow em 375 / 768 / 1280 px; título em 2 linhas a 1280 px |
+| Lighthouse (Onda 1, item 9.7) | Performance 25 · Acessibilidade 96 · Boas Práticas 96 · SEO 100 |
+
+### Pendências herdadas
+
+- **G2-TASK-01 / A-01:** arquivo final da marca (SVG ou PNG transparente) para substituir a composição.
+- **G3-TASK-02/03 / A-03:** 3–4 fotos de Porto Alegre e ~3 de Florianópolis, licenciadas e sem marca de ferramenta.
+- **9.7 (Lighthouse):** Performance 25 por causa do HTML de 1,59 MB com imagens em base64 + Tailwind CDN; corrigir exige mudar o modelo de mídia (fora do escopo desta entrega). Acessibilidade perde pontos por contraste de botões brancos sobre `#00B4D8` e por textos do rodapé — dívida anterior a este PRD.
+- **D-11 / G-02:** textos institucionais (incluindo os 4 parágrafos novos) seguem sem validação jurídica/factual antes de publicar.
 
 ## Riscos
 
