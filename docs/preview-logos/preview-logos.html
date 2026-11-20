@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<title>Preview — Opções de logomarca</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 24px 64px;
+    background: #eef1f4;
+    font-family: "Segoe UI", system-ui, sans-serif;
+    color: #072a36;
+  }
+  .wrap { max-width: 1320px; margin: 0 auto; }
+  h1 { font-size: 22px; margin: 0 0 4px; font-weight: 600; }
+  .sub { font-size: 13px; color: #5b6b73; margin: 0 0 28px; }
+  .option { margin-bottom: 34px; }
+  .label { display: flex; align-items: baseline; gap: 10px; margin-bottom: 10px; }
+  .label b { font-size: 15px; }
+  .label span { font-size: 12px; color: #5b6b73; }
+  .tag {
+    font-size: 10px; text-transform: uppercase; letter-spacing: .08em;
+    background: #fff; border: 1px solid #cfd8dd; border-radius: 3px;
+    padding: 2px 6px; color: #45606b;
+  }
+  .tag.warn { border-color: #e0a800; color: #8a6400; background: #fff8e1; }
+  .tag.bad { border-color: #d64545; color: #a11; background: #fdecec; }
+
+  .header {
+    height: 80px; width: 100%;
+    background: linear-gradient(90deg, #14bbdc 0%, #12b8d8 55%, #0e9cc4 100%);
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 24px; padding: 0 32px;
+  }
+  .header.mobile { width: 375px; padding: 0 16px; gap: 10px; }
+  .logo { height: 54px; width: auto; display: block; }
+  .header.mobile .logo { height: 46px; }
+  .nav { display: flex; gap: 32px; font-size: 13px; color: #fff; }
+  .nav span { opacity: .95; }
+  .nav .active { border-bottom: 1px solid #fff; padding-bottom: 3px; }
+  .phone { font-size: 13px; color: #fff; white-space: nowrap; }
+  .menu-btn {
+    display: none; font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+    color: #fff; border: 1px solid rgba(255,255,255,.35); padding: 8px 12px;
+  }
+  .header.mobile .nav, .header.mobile .phone { display: none; }
+  .header.mobile .menu-btn { display: inline-block; }
+
+  .footer {
+    background: #041b24; padding: 26px 32px; display: flex; align-items: center; gap: 20px;
+  }
+  .footer .logo { height: 44px; }
+  .footer .note { font-size: 11px; color: rgba(255,255,255,.55); }
+
+  .crop { display: flex; gap: 18px; align-items: flex-end; margin-top: 10px; }
+  .crop .box {
+    background: repeating-conic-gradient(#e4e9ec 0% 25%, #f6f8f9 0% 50%) 50% / 16px 16px;
+    border: 1px solid #d7dfe3; padding: 10px;
+  }
+  .crop img { display: block; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Comparativo das logomarcas — tamanho real</h1>
+  <p class="sub">Aplicação na barra superior do site (80 px de altura, logo com 54 px) e no rodapé escuro. Fundos das imagens já convertidos para transparência.</p>
+
+  <div class="option">
+    <div class="label">
+      <b>Opção 1 — “IMÓVEIS” em ciano</b>
+      <span class="tag">PNG transparente</span>
+      <span>1.° arquivo: “Logo POA Casa Floripa Imóveis”</span>
+    </div>
+    <div class="header">
+      <img class="logo" src="logo-opcao-1-azul.png" alt="Poa Floripa Imóveis" />
+      <div class="nav"><span class="active">Página inicial</span><span>Imóveis Selecionados</span><span>Sobre Nós</span><span>Contato</span></div>
+      <div class="phone">(48) 99999-0240</div>
+    </div>
+    <div class="crop">
+      <div class="header mobile">
+        <img class="logo" src="logo-opcao-1-azul.png" alt="" />
+        <span class="menu-btn">Menu</span>
+      </div>
+      <div class="footer"><img class="logo" src="logo-opcao-1-azul.png" alt="" /><span class="note">Rodapé — fundo #041B24</span></div>
+    </div>
+  </div>
+
+  <div class="option">
+    <div class="label">
+      <b>Opção 2 — “IMÓVEIS” em branco</b>
+      <span class="tag">PNG transparente</span>
+      <span>2.° arquivo: “Logo POA Floripa Imóveis em Preto e Branco”</span>
+    </div>
+    <div class="header">
+      <img class="logo" src="logo-opcao-2-branco.png" alt="Poa Floripa Imóveis" />
+      <div class="nav"><span class="active">Página inicial</span><span>Imóveis Selecionados</span><span>Sobre Nós</span><span>Contato</span></div>
+      <div class="phone">(48) 99999-0240</div>
+    </div>
+    <div class="crop">
+      <div class="header mobile">
+        <img class="logo" src="logo-opcao-2-branco.png" alt="" />
+        <span class="menu-btn">Menu</span>
+      </div>
+      <div class="footer"><img class="logo" src="logo-opcao-2-branco.png" alt="" /><span class="note">Rodapé — fundo #041B24</span></div>
+    </div>
+  </div>
+
+  <div class="option">
+    <div class="label">
+      <b>Opção 3 — “IMÓVEIS” em vermelho</b>
+      <span class="tag bad">arquivo com falhas</span>
+      <span>3.° arquivo: “Logo POA Floripa Imóveis”</span>
+    </div>
+    <div class="header">
+      <img class="logo" src="logo-opcao-3-arte.png" alt="Poa Floripa Imóveis" />
+      <div class="nav"><span class="active">Página inicial</span><span>Imóveis Selecionados</span><span>Sobre Nós</span><span>Contato</span></div>
+      <div class="phone">(48) 99999-0240</div>
+    </div>
+    <div class="crop">
+      <div class="header mobile">
+        <img class="logo" src="logo-opcao-3-arte.png" alt="" />
+        <span class="menu-btn">Menu</span>
+      </div>
+      <div class="footer"><img class="logo" src="logo-opcao-3-arte.png" alt="" /><span class="note">Rodapé — fundo #041B24</span></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -20,6 +20,14 @@
 - Escopo fechado: CTAs, links, rodapé e `pool-secondary` **não** foram alterados.
 - Sublinhado de hover/focus usa `currentColor`, acompanhando a cor do texto.
 
+## Logomarca (D-01 — 20/11/2026)
+- Arquivo de produção: `assets/img/logo-poa-floripa-imoveis.png` (720×148, PNG com transparência, 41 KB).
+- Composição: "POA" + casa vermelha + "FLORIPA" em branco, com "IMÓVEIS" em branco centralizado na segunda linha.
+- Aplicação: header (`h-[46px]` no mobile, `h-[54px]` a partir de `sm`) e rodapé (`h-12`), **direto sobre o azul**, sem selo.
+- `alt="Poa Floripa Imóveis"`; o link da marca continua resetando os filtros.
+- Fonte: opção 2 aprovada em 20/11/2026. Os arquivos originais recebidos tinham fundo preto; a versão de produção foi recortada, teve o fundo removido e foi redimensionada.
+- Contraste: o logo é branco sobre `#12B8D8` (2,37:1). Vale a mesma exceção registrada para a barra.
+
 ## Tipografia
 - Títulos: Cormorant Garamond (`font-serif`).
 - Texto/UI: Plus Jakarta Sans (`font-sans`); rótulos em caixa-alta com `tracking-[0.15–0.22em]`.

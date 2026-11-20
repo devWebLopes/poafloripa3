@@ -4,7 +4,7 @@
 - **Plano:** [plans/plan-003-prd-alteracoes-site.md](plans/plan-003-prd-alteracoes-site.md)
 - **Fonte de requisitos:** [prds/levantamento-alteracoes-site-2026-11-13.md](prds/levantamento-alteracoes-site-2026-11-13.md)
 - **Base técnica:** `index.html` (1.483 linhas), `vercel.json`
-- **Versão:** 1.3 — Ondas 1, 2 e 3 executadas e Onda 4 parcialmente executada em 18/11/2026; restam o ativo da marca e as fotos licenciadas
+- **Versão:** 1.4 — Ondas 1, 2 e 3 executadas, Onda 4 parcialmente executada em 18/11/2026 e marca oficial aplicada em 20/11/2026; restam as fotos licenciadas
 
 ## Como este arquivo está organizado
 
@@ -337,9 +337,9 @@
 
 **Aceite:** contraste ≥ 4,5:1 para texto normal e ≥ 3:1 para texto grande. ⚠️ **Revisado:** o solicitante pediu o texto **branco** de volta em 18/11/2026; com branco o contraste fica 2,29:1–3,20:1 (abaixo de AA). Exceção registrada em `docs/design-system.md`; se quiser AA com texto branco, a barra precisa escurecer para ~`#07809B`.
 
-## G2 — Logomarca (RF-01) — **EXECUTADO EM CÓDIGO (18/11/2026)**
+## G2 — Logomarca (RF-01) — **EXECUTADO (18/11/2026 código · 20/11/2026 ativo oficial)**
 
-> D-01 definida como "composição em código agora": header e rodapé já exibem "POA + casinha + FLORIPA" com "IMÓVEIS" centralizado. O ativo final (A-01) substitui a composição quando chegar.
+> D-01 resolvida em 20/11/2026: ativo oficial `assets/img/logo-poa-floripa-imoveis.png` (opção 2 — "IMÓVEIS" branco) aplicado no header e no rodapé, direto sobre o azul. A composição provisória em código foi removida.
 
 ### G2-TASK-01 — Preparar o ativo final da marca
 
@@ -348,12 +348,12 @@
 - **Depende de:** D-01
 - **Arquivos/contexto:** destino `assets/img/` (exceção autorizada pelo PRD 9.2, item 8)
 
-- [ ] 1.1 Receber SVG ou PNG transparente em boa resolução.
-- [ ] 1.2 Confirmar que é a versão final aprovada.
+- [x] 1.1 Receber SVG ou PNG transparente em boa resolução.
+- [x] 1.2 Confirmar que é a versão final aprovada.
 - [x] 1.3 Validar legibilidade em 375 px e sobre a barra.
 - [x] 1.4 Definir `alt="Poa Floripa Imóveis"`.
 
-**Aceite:** ativo único, aprovado e tecnicamente adequado. ⏳ Ativo pendente; a composição provisória (texto + SVG inline) já está no ar e será trocada por `<img>` quando o arquivo chegar.
+**Aceite:** ativo único, aprovado e tecnicamente adequado. ✅ **Concluído em 20/11/2026:** opção 2 ("IMÓVEIS" branco) aprovada pelo solicitante; PNG de 720×148 (41 KB) gerado a partir do original, com fundo removido e transparência validada.
 
 ### G2-TASK-02 — Reestruturar a marca no header
 
@@ -367,7 +367,7 @@
 - [x] 2.3 Preservar `h-20` ou ajustar o `pt-20` do hero de forma coerente.
 - [x] 2.4 Garantir nome acessível.
 
-**Aceite:** "IMÓVEIS" centralizado; sem deformação; sem sobreposição do hero; foco visível. ✅ Executado em 18/11/2026 (composição provisória: caixa branca de 54 px dentro dos 80 px do header; "IMÓVEIS" deslocado 1 px do centro óptico).
+**Aceite:** "IMÓVEIS" centralizado; sem deformação; sem sobreposição do hero; foco visível. ✅ Executado em 18/11/2026 (composição provisória) e substituído em 20/11/2026 pela imagem oficial (`h-[46px]` no mobile, `h-[54px]` em `sm+`).
 
 ### G2-TASK-03 — Aplicar a mesma marca no rodapé
 
@@ -380,7 +380,7 @@
 - [x] 3.2 Conferir contraste sobre `pool-abyss`.
 - [x] 3.3 Garantir paridade visual com o header.
 
-**Aceite:** marca idêntica em header e rodapé, sem divergência de proporção ou alinhamento. ✅ Executado em 18/11/2026 (mesma composição, tipografia `text-lg` e "IMÓVEIS" em 9 px).
+**Aceite:** marca idêntica em header e rodapé, sem divergência de proporção ou alinhamento. ✅ Executado em 18/11/2026 (composição) e substituído em 20/11/2026 pela mesma imagem oficial, em `h-12`.
 
 ## G3 — Seção "De Porto Alegre a Florianópolis" (RF-08) — **TEXTO EXECUTADO; GALERIA BLOQUEADA**
 
@@ -501,9 +501,9 @@
 | 8 | TASK-08 — SEO | Baixa | `@conteudo-dados` | D-13 | ✅ |
 | 9 | TASK-09 — QA Onda 1 | Média | `@qa-engineer` | TASK-01..08 | 🟡 validação visual por Evandro (abrir `index.html` no navegador) |
 | 10 | G1-TASK-01..03 — Azul da barra | Média | `@ui-ux-designer`/`@frontend-dev` | D-02, D-03 | ✅ |
-| 11 | G2-TASK-02..03 — Marca no header/rodapé | Média | `@frontend-dev` | D-01 | ✅ composição provisória |
+| 11 | G2-TASK-02..03 — Marca no header/rodapé | Média | `@frontend-dev` | D-01 | ✅ imagem oficial |
 | 12 | G3-TASK-01 — Seção editorial | Alta | `@frontend-dev`/`@conteudo-dados` | D-07, D-09 | ✅ |
-| G | G2-TASK-01 — Ativo final da marca | Média | `@conteudo-dados` | A-01 | ⏳ aguardando arquivo |
+| G | G2-TASK-01 — Ativo final da marca | Média | `@conteudo-dados` | A-01 | ✅ opção 2 aplicada em 20/11/2026 |
 | G | G3-TASK-02..03 — Galeria + otimização | Alta | `@frontend-dev`/`@conteudo-dados` | D-08, A-03 | ⛔ aguardando fotos |
 
-**Total:** 12 tasks executadas (9 da Onda 1, 3 da Onda 2, mais G2-TASK-02/03 e G3-TASK-01) + 3 tasks gated (ativo da marca, galeria, QA final da seção) + 20 itens de decisão/ativo.
+**Total:** 13 tasks executadas (9 da Onda 1, 3 da Onda 2, G2-TASK-01/02/03 e G3-TASK-01) + 2 tasks gated (galeria e QA final da seção) + 20 itens de decisão/ativo.

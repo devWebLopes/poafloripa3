@@ -1,6 +1,6 @@
 # Plano 003 — PRD e backlog das alterações solicitadas em 13/11/2026
 
-- **Status:** Ondas 1, 2 e 3 executadas e Onda 4 com texto publicado em 18/11/2026; restam o ativo final da marca, as fotos da galeria e o Lighthouse de Performance
+- **Status:** Ondas 1, 2 e 3 executadas, marca oficial aplicada em 20/11/2026 e Onda 4 com texto publicado em 18/11/2026; restam as fotos da galeria e o Lighthouse de Performance
 - **Agente líder:** Arquiteto ([agents/arquiteto.md](../agents/arquiteto.md))
 - **Apoio:** Conteúdo & Dados, Frontend, QA & Deploy
 - **Skills:** catalogo-imoveis, html-semantico-seo, tailwind-design-system, vanilla-js-modular, otimizacao-imagens, qa-validacao-web
@@ -185,6 +185,44 @@ O solicitante rejeitou o texto petróleo na barra e pediu o **branco** de volta.
 - **G3-TASK-02/03 / A-03:** 3–4 fotos de Porto Alegre e ~3 de Florianópolis, licenciadas e sem marca de ferramenta.
 - **9.7 (Lighthouse):** Performance 25 por causa do HTML de 1,59 MB com imagens em base64 + Tailwind CDN; corrigir exige mudar o modelo de mídia (fora do escopo desta entrega). Acessibilidade perde pontos por contraste de botões brancos sobre `#00B4D8` e por textos do rodapé — dívida anterior a este PRD.
 - **D-11 / G-02:** textos institucionais (incluindo os 4 parágrafos novos) seguem sem validação jurídica/factual antes de publicar.
+
+## Registro de execução — Marca oficial (20/11/2026)
+
+### Decisão
+
+| ID | Decisão | Efeito |
+|---|---|---|
+| **D-01** | Opção 2: "IMÓVEIS" em branco, aplicada **direto sobre o azul** | Composição provisória substituída por `<img>` no header e no rodapé |
+
+### Ativo de produção
+
+- `assets/img/logo-poa-floripa-imoveis.png` — 720×148, PNG com transparência, 41 KB.
+- Gerado a partir de `Logo POA Floripa Imóveis em Preto e Branco.png` (2172×724, fundo preto sólido): fundo removido por chave de luminância, cores planas reconstruídas (branco/vermelho) para eliminar franjas de compressão, recorte de margens e redimensionamento com interpolação de alta qualidade.
+
+### Alterações em `index.html`
+
+1. **Header:** bloco CSS (texto + SVG) substituído por `<img src="assets/img/logo-poa-floripa-imoveis.png">` com `h-[46px]` no mobile e `h-[54px]` em `sm+`.
+2. **Rodapé:** mesma composição substituída pela imagem em `h-12`.
+3. `alt="Poa Floripa Imóveis"` nos dois pontos; link da marca e reset de filtros preservados.
+
+### Evidências de QA
+
+| Verificação | Resultado |
+|---|---|
+| 375 px (iframe real) | logo de 224 px de largura + botão "Menu" sem overflow |
+| 768 px | logo + telefone + "Menu" alinhados |
+| 1280 px | logo + 4 links + telefone sem sobreposição |
+| Rodapé 375/1280 px | logo legível sobre `#041B24` |
+| Transparência | canto com alpha 0; sem fundo preto residual |
+| Contraste do logo sobre a barra | 2,37:1 — mesma exceção registrada em `docs/design-system.md` |
+| Console | sem novos erros |
+
+### Pendências herdadas
+
+- **A-03 / G3-TASK-02/03:** fotos licenciadas da seção histórica.
+- **D-11 / G-02:** validação jurídica e factual dos textos institucionais.
+- **D-12:** telefone vigente (aceite de negócio).
+- **9.7:** Performance 25 (base64 + Tailwind CDN) — transferir para o PRD de evolução.
 
 ## Riscos
 
