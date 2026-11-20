@@ -8,7 +8,7 @@
 | `pool-deep` / `pool-abyss` | `#072A36` / `#041B24` | textos escuros, rodapé |
 | `pool-light` | `#EBF9FC` | fundos suaves |
 | `pool-bar` | `#12B8D8` | **exclusivo da barra superior** (D-02: barra apenas) |
-| `brand-red` | `#D62828` | apenas ícone do logo |
+| `brand-red` | `#D62828` | apenas ícone do logo. **Atenção:** o PNG oficial do logo renderiza esse vermelho como `#FD0215` (medido pixel a pixel em 20/11/2026); o favicon usa o valor do ativo, não o do token |
 | `minimal-*` | bg, offwhite, border, muted, ink | neutros |
 
 ### Barra superior (D-02/D-03 — 18/11/2026)
@@ -27,6 +27,18 @@
 - `alt="Poa Floripa Imóveis"`; o link da marca continua resetando os filtros.
 - Fonte: opção 2 aprovada em 20/11/2026. Os arquivos originais recebidos tinham fundo preto; a versão de produção foi recortada, teve o fundo removido e foi redimensionada.
 - Contraste: o logo é branco sobre `#12B8D8` (2,37:1). Vale a mesma exceção registrada para a barra.
+
+### Favicon (20/11/2026)
+- Desenho: **apenas a casinha da marca**, redesenhada em vetor (sem as letras) no **vermelho exato do ativo do logo (`#FD0215`)**, num quadrado de 120×120 com ~6,7% de respiro em cada lado. Não é o logo inteiro reduzido — a 16 px as letras seriam ilegíveis.
+- Ativos em `assets/img/`:
+  | Arquivo | Uso |
+  |---|---|
+  | `favicon.svg` | vetor (0,6 KB); navegadores modernos |
+  | `favicon.ico` | 16/32/48 px; aba, favoritos e requisições legadas de `/favicon.ico` |
+  | `favicon-96x96.png` | fallback PNG para navegadores sem SVG |
+  | `apple-touch-icon.png` | 180×180 com fundo branco (iOS ignora transparência) |
+- Markup no `<head>` do `index.html`: `favicon.ico` → `favicon.svg` → PNG 96 → `apple-touch-icon`. Resolve o 404 de `/favicon.ico` registrado no PRD (C-04).
+- `assets/img/fav_icon.svg` (SVG que embute o logo inteiro, 720×148, em PNG base64) **não é mais usado**.
 
 ## Tipografia
 - Títulos: Cormorant Garamond (`font-serif`).

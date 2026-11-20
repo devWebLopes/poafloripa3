@@ -382,6 +382,19 @@
 
 **Aceite:** marca idêntica em header e rodapé, sem divergência de proporção ou alinhamento. ✅ Executado em 18/11/2026 (composição) e substituído em 20/11/2026 pela mesma imagem oficial, em `h-12`.
 
+### G2-TASK-04 — Favicon da marca (20/11/2026)
+
+- **Complexidade:** Baixa
+- **Agente:** `@frontend-dev`
+- **Arquivos/contexto:** `index.html` (`<head>`), `assets/img/`; [docs/design-system.md](docs/design-system.md)
+
+- [x] 4.1 Vetorizar a casinha a partir do logo oficial (sem as letras, no vermelho exato do ativo: `#FD0215`).
+- [x] 4.2 Gerar `favicon.svg`, `favicon.ico` (16/32/48), `favicon-96x96.png` e `apple-touch-icon.png`.
+- [x] 4.3 Declarar os ícones no `<head>` no lugar de `fav_icon.svg`.
+- [x] 4.4 Conferir legibilidade em 16/32/48 px e o `apple-touch-icon` em fundo branco.
+
+**Aceite:** aba e atalho móvel com a casinha da marca; `/favicon.ico` deixa de responder 404 (PRD C-04). ✅ O desenho compara com o original em 512 px; a 16 px a casinha continua legível (porta e chaminé viram detalhes).
+
 ## G3 — Seção "De Porto Alegre a Florianópolis" (RF-08) — **TEXTO EXECUTADO; GALERIA BLOQUEADA**
 
 > D-07 = texto sempre visível; D-09 = depois de "Sobre Nós". A estrutura e os textos estão no ar (`#duasCapitais`). A galeria (G3-TASK-02/03) aguarda as fotos licenciadas (D-08/A-03), conforme decisão do solicitante.

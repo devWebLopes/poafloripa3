@@ -336,7 +336,7 @@ Situação conferida no `index.html` em 19/11/2026:
 | RNF-07 | Rastreabilidade | Cada texto publicado corresponde ao levantamento | ✅ comparação automatizada 5/5 na seção histórica |
 | RNF-08 | Regressão funcional | Filtros, busca, modal, lightbox, drawer, formulários e WhatsApp operando | ✅ testado em duas rodadas |
 | RNF-09 | Manutenibilidade | Alterações localizadas e comentadas; sem refatoração ampla | ✅ |
-| RNF-10 | Console limpo | Zero erros e warnings relevantes | ⚠️ Zero erros; permanecem o aviso do Tailwind CDN e o 404 de `favicon.ico` |
+| RNF-10 | Console limpo | Zero erros e warnings relevantes | ⚠️ Zero erros; resta apenas o aviso do Tailwind CDN (o 404 de `favicon.ico` foi resolvido em 20/11/2026 com os favicons da marca) |
 
 **Lighthouse 12 (18/11/2026, Chrome headless, servidor local):** Performance **25** · Acessibilidade **96** · Boas Práticas **96** · SEO **100**. FCP 11,3 s e LCP 11,6 s por causa dos 1,59 MB de página com imagens em base64. Corrigir isso exige mudar o modelo de mídia e pertence ao [PRD de evolução para produção](prd-evolucao-producao.md).
 
@@ -397,7 +397,7 @@ Base: `skills/qa-validacao-web.md`. Testes executados em 18/11/2026, em servidor
 
 | Verificação | Resultado |
 |---|---|
-| Console (Chrome headless) | zero erros; aviso do Tailwind CDN e 404 de `favicon.ico` |
+| Console (Chrome headless) | zero erros; aviso do Tailwind CDN (o 404 de `favicon.ico`, medido em 18/11/2026, foi resolvido em 20/11/2026) |
 | Filtros: 9 opções | OK |
 | 4 novas categorias | 0 cards + estado vazio com "Limpar filtros" |
 | "Limpar filtros" | restaura os 6 imóveis |
@@ -504,7 +504,7 @@ A entrega só pode ser considerada concluída quando **todos** os itens abaixo f
 
 - Contraste AA da barra (RNF-01) — depende de decisão visual do cliente.
 - Performance (RNF-03) — depende de sair do base64 e do Tailwind CDN.
-- `favicon.ico` ausente — 404 no console.
+- ~~`favicon.ico` ausente — 404 no console.~~ ✅ Resolvido em 20/11/2026 (ver C-04).
 
 ---
 
@@ -517,7 +517,7 @@ Identificados ao conferir o `index.html` em 19/11/2026. **Não são requisitos d
 | C-01 | Rodapé exibe "CRECI RS/SC" **sem número** | `index.html` L643 | Descumpre a regra de exibição do CRECI/SC informada pelo cliente (sigla + número + sufixo J, com no mínimo 25% da altura do nome) | Publicar **"CRECI/SC 12028-J"** no rodapé e nas peças de divulgação |
 | C-02 | Rodapé não exibe CNPJ, razão social nem endereço | `index.html` L642-645 | Enfraquece a identificação da pessoa jurídica e a confiança do usuário | Incluir "TSR Assessoria Empresarial Ltda · CNPJ 49.975.398/0001-70 · Rua Procópio Manoel Pires, 84 — Trindade, Florianópolis/SC" |
 | C-03 | Telefones publicados são placeholders (`99999-…`) | header, rodapé, modais | Passa impressão de contato falso | Substituir pelos números reais quando o chip for adquirido (D-12) |
-| C-04 | `favicon.ico` ausente | 404 no console | Ruído técnico e perda de identidade na aba | Adicionar favicon a partir da marca |
+| C-04 | `favicon.ico` ausente | 404 no console | Ruído técnico e perda de identidade na aba | ✅ **Resolvido em 20/11/2026:** casinha da marca vetorizada (`favicon.svg`, `favicon.ico`, `favicon-96x96.png` e `apple-touch-icon.png` em `assets/img/`), declaradas no `<head>` |
 | C-05 | Performance 25 no Lighthouse | 1,59 MB, imagens em base64, Tailwind CDN | Experiência ruim em mobile e prejuízo a SEO | Tratar no PRD de evolução (conteúdo + mídia) |
 
 > **Observação:** C-01 e C-02 são os achados de maior impacto prático. O dossiê institucional (`dossie-poa-floripa-imoveis.md`) já os classificava como divergências críticas.
