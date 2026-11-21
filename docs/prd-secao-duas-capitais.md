@@ -72,17 +72,15 @@ O texto não deve ficar centralizado: a leitura longa permanece alinhada à esqu
 
 | Faixa | Comportamento |
 |---|---|
-| 320–639 px | Altura automática; `padding` vertical mínimo de 72 px; título 36–40 px; corpo em uma coluna; controles após o texto |
-| 640–1023 px | `padding` de 88–104 px; título 44–52 px; largura de conteúdo limitada; uma coluna |
-| ≥ 1024 px | `padding` de 112–128 px; título 52–60 px; parágrafos centrais em duas colunas; conteúdo máximo de 1120 px |
+| 320–639 px | Altura automática; `padding` vertical de 72 px; título 36–40 px; corpo em uma coluna; controles após o texto |
+| 640–1023 px | Altura automática; `padding` vertical de 88 px; título 44–52 px; uma coluna |
+| ≥ 1024 px | Altura visual de 680–800 px quando o conteúdo couber; título de 52 px; parágrafos centrais em duas colunas; conteúdo máximo de 1200 px |
 
 Não usar altura fixa. A seção precisa crescer com o texto, zoom do navegador e fontes carregadas, sem corte ou sobreposição.
 
-### 4.4.1 Faixa fotográfica no mobile (ajuste de 21/11/2026)
+### 4.4.1 Contenção fotográfica (correção de 21/11/2026)
 
-Abaixo de 640 px a seção fica muito mais alta e estreita que a proporção das quatro fotos (paisagem). Cobrir a altura inteira da seção com `object-fit: cover` forçava um recorte extremo — menos de 15% da largura da foto ficava visível, ampliada a ponto de a imagem virar uma mancha escura irreconhecível ("imagem gigante estourando a tela", relatado pelo solicitante em 21/11/2026).
-
-A partir de 640 px a composição permanece como descrita em 4.2 (fundo integral). Abaixo disso, a camada fotográfica vira uma **faixa com proporção própria (4:5)** no topo da seção, com um degradê para a cor sólida `pool-abyss` no final da faixa; o restante do texto passa a repousar sobre essa cor sólida, que já é o fundo da seção. Isso recupera um recorte legível (40–95% da largura da foto visível, a depender da orientação de cada imagem) sem introduzir altura fixa na seção (apenas na faixa fotográfica) e sem alterar o layout em 640 px ou mais.
+Em todos os breakpoints, inclusive no mobile, a camada fotográfica ocupa exatamente a área da seção com `position: absolute`, `inset: 0` e `overflow: hidden`. Slides e imagens também preenchem 100% dessa camada; as imagens usam `object-fit: cover`, enquadramento central e zoom máximo de apenas 1,03. A seção continua com altura automática abaixo de 1024 px para não cortar o texto, enquanto o clipping em todas as camadas impede que o movimento gere overflow ou ultrapasse visualmente seus limites.
 
 ## 5. Curadoria de imagens
 
@@ -124,16 +122,16 @@ A presença dos arquivos no repositório não comprova licença. Antes de public
 
 ### 6.1 Alternância
 
-- Permanência de cada slide: **9 segundos** (ajustado de 12s em 21/11/2026; ver nota de revisão abaixo).
-- Crossfade: **1,4 segundo**, usando opacidade e curva `ease-in-out`.
+- Permanência de cada slide: **6 segundos**.
+- Crossfade: **800 ms**, usando opacidade e curva `ease-in-out`.
 - A próxima imagem só entra após estar carregada e decodificada; não pode ocorrer flash branco.
 - A rotação pausa quando a aba fica oculta e retoma sem avançar várias imagens de uma vez.
 - Seleção manual reinicia a contagem a partir do slide escolhido.
 
 ### 6.2 Movimento de câmera
 
-- Ken Burns de **9 segundos** por imagem — igual à permanência do slide (ajustado de 28–32s; ver nota de revisão abaixo).
-- Escala máxima de **1.12** e deslocamento máximo de **2,4%** por eixo (ajustado de 1.06 / 1%).
+- Ken Burns de **6 segundos** por imagem — igual à permanência do slide.
+- Escala máxima de **1.03**, sem deslocamento lateral ou vertical.
 - Direções alternadas para evitar repetição mecânica.
 - Somente `transform` e `opacity`, sem animar dimensões ou posição de layout.
 
@@ -144,6 +142,10 @@ A primeira implementação usava Ken Burns de 30s com permanência de slide de 1
 ### 6.4 Nota de revisão (21/11/2026 — recorte extremo no mobile)
 
 Ver 4.4.1. O recorte extremo no mobile, somado ao zoom do Ken Burns (6.2), agravava a sensação de "imagem gigante". Com a faixa fotográfica de proporção própria no mobile (4.4.1), o recorte de base ficou razoável e o Ken Burns passou a ser percebido como o movimento sutil pretendido, sem competir com a legibilidade da foto.
+
+### 6.5 Nota de revisão final (21/11/2026 — contenção e altura)
+
+A calibração de 1,12 e a faixa fotográfica móvel foram substituídas pela solução atual: camada integral absoluta em todos os breakpoints, clipping no contêiner, wrapper e slides, escala máxima de 1,03, crossfade de 800 ms e autoplay de 6 s. No desktop de 1280 px, a composição textual foi compactada sem reescrita para manter a seção em aproximadamente 812 px de altura. Esta revisão substitui as calibrações visuais descritas nas notas históricas 6.3 e 6.4.
 
 ### 6.3 Controle e redução de movimento
 

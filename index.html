@@ -101,58 +101,52 @@
       will-change: transform;
     }
 
-    /* Efeito 1b: Slideshow editorial da seção "Duas Capitais" (Ken Burns próprio) */
-    /* No mobile a seção fica muito mais alta e estreita que as fotos (paisagem),
-       então o "object-fit: cover" precisaria ampliar a imagem demais para cobrir
-       toda a altura — a foto ficava irreconhecível ("gigante estourando a tela").
-       A partir de 640px a faixa fotográfica cobre a seção inteira normalmente;
-       abaixo disso ela vira uma faixa com proporção própria, com o restante do
-       texto repousando sobre a cor sólida `pool-abyss` do fundo da seção. */
+    /* Efeito 1b: slideshow editorial contido da seção "Duas Capitais" */
+    #duasCapitais {
+      position: relative;
+      max-width: 100%;
+      overflow: hidden;
+    }
     .dc-photo-band {
       position: absolute;
       inset: 0;
+      width: 100%;
+      height: 100%;
       overflow: hidden;
-    }
-    @media (max-width: 639px) {
-      .dc-photo-band {
-        bottom: auto;
-        aspect-ratio: 4 / 5;
-      }
-      .dc-photo-band::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(180deg, rgba(4, 27, 36, 0) 55%, rgba(4, 27, 36, 0.94) 100%);
-        pointer-events: none;
-      }
     }
     .dc-slide {
       position: absolute;
       inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
       opacity: 0;
-      transition: opacity 1.4s ease-in-out;
+      pointer-events: none;
+      transition: opacity 800ms ease-in-out;
     }
     .dc-slide.is-active {
       opacity: 1;
+      pointer-events: auto;
     }
     .dc-media {
+      display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center;
+      transform: scale(1);
+      transform-origin: center center;
     }
     @keyframes dcKenBurnsA {
       0% { transform: scale(1) translate3d(0, 0, 0); }
-      100% { transform: scale(1.12) translate3d(-2.4%, -1.4%, 0); }
+      100% { transform: scale(1.03) translate3d(0, 0, 0); }
     }
     @keyframes dcKenBurnsB {
-      0% { transform: scale(1.12) translate3d(2.4%, 1.4%, 0); }
+      0% { transform: scale(1.03) translate3d(0, 0, 0); }
       100% { transform: scale(1) translate3d(0, 0, 0); }
     }
-    /* Duração igual ao tempo de exibição do slide (RF-ALT-01): o zoom completa
-       o percurso inteiro enquanto a imagem está visível, em vez de ser cortado
-       no meio do caminho pela troca de slide. */
     .dc-animating .dc-slide.is-active .dc-media {
-      animation: dcKenBurnsA 9s ease-in-out forwards;
+      animation: dcKenBurnsA 6s ease-in-out forwards;
       will-change: transform;
     }
     .dc-animating .dc-slide.is-active[data-dc-motion="b"] .dc-media {
@@ -160,6 +154,53 @@
     }
     .dc-paused .dc-slide.is-active .dc-media {
       animation-play-state: paused;
+    }
+    .dc-content {
+      box-sizing: border-box;
+      width: 100%;
+      padding-top: 72px;
+      padding-bottom: 72px;
+    }
+    @media (min-width: 640px) {
+      .dc-content {
+        padding-top: 88px;
+        padding-bottom: 88px;
+      }
+    }
+    @media (min-width: 1024px) {
+      #duasCapitais .dc-content {
+        display: flex;
+        max-width: 1200px;
+        min-height: clamp(680px, 62vw, 800px);
+        flex-direction: column;
+        justify-content: center;
+        padding-top: 36px;
+        padding-bottom: 36px;
+      }
+      #duasCapitaisTitle {
+        max-width: 28ch;
+        font-size: 52px;
+        line-height: 1.02;
+      }
+      #duasCapitais .dc-intro {
+        max-width: 80ch;
+        margin-top: 20px;
+        font-size: 16px;
+        line-height: 1.6;
+      }
+      #duasCapitais .dc-columns {
+        margin-top: 24px;
+        gap: 32px;
+        line-height: 1.45;
+      }
+      #duasCapitais .dc-closing {
+        max-width: 100%;
+        margin-top: 24px;
+        line-height: 1.45;
+      }
+      #duasCapitais .dc-controls {
+        margin-top: 24px;
+      }
     }
     .dc-dot {
       display: inline-flex;
@@ -212,8 +253,10 @@
       .dc-dot span {
         transition: none;
       }
+      .dc-media,
       .dc-animating .dc-slide.is-active .dc-media {
         animation: none;
+        transform: none;
       }
       /* especificidade acima do utilitário .flex do Tailwind */
       #duasCapitais .dc-controls {
@@ -650,7 +693,7 @@
     <!-- Véu constante + gradiente responsivo para legibilidade em qualquer fundo -->
     <div class="absolute inset-0 dc-veil" aria-hidden="true"></div>
 
-    <div class="relative z-10 max-w-[1120px] mx-auto px-4 sm:px-8 py-[72px] sm:py-24 lg:py-32">
+    <div class="dc-content relative z-10 max-w-[1120px] mx-auto px-4 sm:px-8">
 
       <div class="max-w-4xl">
         <span class="text-[11px] uppercase tracking-[0.22em] text-pool-light font-semibold">
@@ -661,11 +704,11 @@
         </h2>
       </div>
 
-      <p class="mt-7 max-w-[68ch] text-base sm:text-lg text-white/90 font-light leading-relaxed">
+      <p class="dc-intro mt-7 max-w-[68ch] text-base sm:text-lg text-white/90 font-light leading-relaxed">
         A conexão entre Porto Alegre e Florianópolis vai muito além da proximidade geográfica — ela está escrita na própria origem das duas cidades. Ambas foram moldadas pelo espírito pioneiro e acolhedor dos colonizadores açorianos no século XVIII, que encontraram nas águas do Lago Guaíba e nas baías da Ilha de Santa Catarina o cenário perfeito para construir comunidades prósperas, vibrantes e intimamente ligadas à natureza.
       </p>
 
-      <div class="mt-10 max-w-5xl grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 text-sm sm:text-base text-white/80 font-light leading-relaxed">
+      <div class="dc-columns mt-10 max-w-5xl grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 text-sm sm:text-base text-white/80 font-light leading-relaxed">
         <p>
           Com o passar dos séculos, cada capital desenvolveu sua própria vocação, criando uma complementaridade única no Sul do Brasil. Porto Alegre, fundada oficialmente em 1772 como o histórico Porto dos Casais, consolidou-se como uma metrópole dinâmica, referência em negócios, cultura, gastronomia e infraestrutura urbana. Seus bairros tradicionais, parques arborizados e a renovada Orla do Guaíba oferecem o equilíbrio ideal entre o ritmo cosmopolita e o bem-estar.
         </p>
@@ -1469,7 +1512,7 @@
 
     // Seção Duas Capitais: fundo fotográfico alternado com controle acessível
     (function initDuasCapitais() {
-      const SLIDE_DURATION = 9000;
+      const SLIDE_DURATION = 6000;
       const section = document.getElementById('duasCapitais');
       if (!section) return;
 
@@ -1485,7 +1528,7 @@
       let timer = null;
       let paused = false;
       let inView = false;
-      let switching = false;
+      let switchRequest = 0;
 
       const clearTimer = () => {
         if (timer !== null) {
@@ -1510,22 +1553,22 @@
         dots.forEach((dot, i) => dot.setAttribute('aria-pressed', String(i === index)));
       };
 
-      const show = (index) => {
-        if (switching || index === current) return;
-        switching = true;
-        waitForImage(slides[index]).then(() => {
+      const show = (index, { automatic = false } = {}) => {
+        const request = ++switchRequest;
+        if (index === current) return Promise.resolve();
+        return waitForImage(slides[index]).then(() => {
+          if (request !== switchRequest) return;
+          if (automatic && (paused || !inView || document.hidden || reducedMotion.matches)) return;
           current = index;
           paint(index);
-          switching = false;
         });
       };
 
       const schedule = () => {
         clearTimer();
-        if (paused || !inView || reducedMotion.matches) return;
+        if (paused || !inView || document.hidden || reducedMotion.matches) return;
         timer = window.setTimeout(() => {
-          show((current + 1) % slides.length);
-          schedule();
+          show((current + 1) % slides.length, { automatic: true }).then(schedule);
         }, SLIDE_DURATION);
       };
 
@@ -1555,8 +1598,10 @@
 
       dots.forEach((dot, index) => {
         dot.addEventListener('click', () => {
-          show(index);
-          if (!paused) schedule();
+          clearTimer();
+          show(index).then(() => {
+            if (!paused) schedule();
+          });
         });
       });
 

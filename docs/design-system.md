@@ -51,6 +51,7 @@
 4. **Hover elegante** em cards (`.sarda-card`, zoom da imagem).
 5. **Mosaico de 5 fotos** no modal (`.auxiliadora-mosaic`).
 6. **Pulso do WhatsApp** (`.wa-official-pulse`).
+7. **Slideshow editorial contido** (`#duasCapitais`): crossfade de 800 ms, ciclo de 6 s e zoom máximo de 1,03; todas as camadas usam clipping e o modo de movimento reduzido permanece estático.
 
 ## Princípios
 Minimalismo, muito espaço em branco, bordas finas `#EAEAEA`, sombras suaves, sem excesso de cor.
