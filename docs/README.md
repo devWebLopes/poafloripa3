@@ -27,3 +27,4 @@ Site WEB estático de imóveis de médio/alto padrão **exclusivamente para vend
 | [deploy.md](deploy.md) | Publicação e validação |
 | [prd-evolucao-producao.md](prd-evolucao-producao.md) | Requisitos para catálogo, CMS, fotos e operação em produção |
 | [prd-alteracoes-site-2026-11-13.md](prd-alteracoes-site-2026-11-13.md) | PRD das alterações solicitadas em 13/11/2026 (marca, cor, filtros, textos e nova seção) |
+| [prd-secao-duas-capitais.md](prd-secao-duas-capitais.md) | PRD do fundo fotográfico alternado, movimento e nova hierarquia da seção “Porto Alegre & Florianópolis” |
