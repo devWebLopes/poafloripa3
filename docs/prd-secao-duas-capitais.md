@@ -78,6 +78,12 @@ O texto não deve ficar centralizado: a leitura longa permanece alinhada à esqu
 
 Não usar altura fixa. A seção precisa crescer com o texto, zoom do navegador e fontes carregadas, sem corte ou sobreposição.
 
+### 4.4.1 Faixa fotográfica no mobile (ajuste de 21/11/2026)
+
+Abaixo de 640 px a seção fica muito mais alta e estreita que a proporção das quatro fotos (paisagem). Cobrir a altura inteira da seção com `object-fit: cover` forçava um recorte extremo — menos de 15% da largura da foto ficava visível, ampliada a ponto de a imagem virar uma mancha escura irreconhecível ("imagem gigante estourando a tela", relatado pelo solicitante em 21/11/2026).
+
+A partir de 640 px a composição permanece como descrita em 4.2 (fundo integral). Abaixo disso, a camada fotográfica vira uma **faixa com proporção própria (4:5)** no topo da seção, com um degradê para a cor sólida `pool-abyss` no final da faixa; o restante do texto passa a repousar sobre essa cor sólida, que já é o fundo da seção. Isso recupera um recorte legível (40–95% da largura da foto visível, a depender da orientação de cada imagem) sem introduzir altura fixa na seção (apenas na faixa fotográfica) e sem alterar o layout em 640 px ou mais.
+
 ## 5. Curadoria de imagens
 
 ### 5.1 Sequência selecionada
@@ -134,6 +140,10 @@ A presença dos arquivos no repositório não comprova licença. Antes de public
 ### 6.3 Nota de revisão (21/11/2026 — correção de percepção de movimento)
 
 A primeira implementação usava Ken Burns de 30s com permanência de slide de 12s: a troca de imagem acontecia com a animação em ~40% do percurso, numa curva `ease-in-out` que começa devagar — o zoom nunca chegava perto da escala máxima antes de sumir, e o usuário percebia a seção como estática. A correção alinha a duração do Ken Burns ao tempo de exibição do slide (zoom completo e visível em cada ciclo) e amplia a escala/deslocamento para reforçar a percepção, mantendo o efeito discreto e dentro do espírito minimalista do site. `prefers-reduced-motion`, pausa e seleção manual permanecem com o mesmo comportamento.
+
+### 6.4 Nota de revisão (21/11/2026 — recorte extremo no mobile)
+
+Ver 4.4.1. O recorte extremo no mobile, somado ao zoom do Ken Burns (6.2), agravava a sensação de "imagem gigante". Com a faixa fotográfica de proporção própria no mobile (4.4.1), o recorte de base ficou razoável e o Ken Burns passou a ser percebido como o movimento sutil pretendido, sem competir com a legibilidade da foto.
 
 ### 6.3 Controle e redução de movimento
 

@@ -102,6 +102,30 @@
     }
 
     /* Efeito 1b: Slideshow editorial da seção "Duas Capitais" (Ken Burns próprio) */
+    /* No mobile a seção fica muito mais alta e estreita que as fotos (paisagem),
+       então o "object-fit: cover" precisaria ampliar a imagem demais para cobrir
+       toda a altura — a foto ficava irreconhecível ("gigante estourando a tela").
+       A partir de 640px a faixa fotográfica cobre a seção inteira normalmente;
+       abaixo disso ela vira uma faixa com proporção própria, com o restante do
+       texto repousando sobre a cor sólida `pool-abyss` do fundo da seção. */
+    .dc-photo-band {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+    @media (max-width: 639px) {
+      .dc-photo-band {
+        bottom: auto;
+        aspect-ratio: 4 / 5;
+      }
+      .dc-photo-band::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(4, 27, 36, 0) 55%, rgba(4, 27, 36, 0.94) 100%);
+        pointer-events: none;
+      }
+    }
     .dc-slide {
       position: absolute;
       inset: 0;
@@ -608,7 +632,7 @@
        ========================================================================= -->
   <section id="duasCapitais" aria-labelledby="duasCapitaisTitle" class="relative overflow-hidden bg-pool-abyss border-t border-white/10">
     <!-- Fundo fotográfico alternado: POA → Floripa → POA → Floripa -->
-    <div class="absolute inset-0" aria-hidden="true">
+    <div class="dc-photo-band" aria-hidden="true">
       <div class="dc-slide is-active" data-dc-slide data-dc-motion="a">
         <img src="assets/img/duas-capitais-poa-noturna.webp" alt="" aria-hidden="true" class="dc-media" width="1440" height="808" loading="lazy" decoding="async" />
       </div>

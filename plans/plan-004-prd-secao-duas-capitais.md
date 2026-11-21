@@ -114,3 +114,27 @@ Documentar uma solução visual e técnica implementável para a seção “Port
 **Decisões confirmadas pelo solicitante em 21/11/2026:** D-DC-02 (crops), D-DC-03 (texto institucional) e D-DC-04 (nível do véu) — ver atualização em [docs/prd-secao-duas-capitais.md](../docs/prd-secao-duas-capitais.md#11-dependências-e-decisões).
 
 **Pendência remanescente:** nenhuma decisão de negócio pendente. Falta apenas o commit das alterações e, se autorizado, o deploy em produção (ambos fora desta etapa até confirmação explícita).
+
+## Correção do recorte extremo no mobile (21/11/2026, segunda continuação)
+
+**Relato do solicitante:** após a correção de movimento, a imagem de fundo apareceu "gigante, estourando a tela" (print em zoom anexado).
+
+**Diagnóstico (Playwright, viewports 375/390/768/1280/1920):** confirmado com medições reais. No mobile a seção tem ~1517 px de altura para 375 px de largura (proporção ~0,25), enquanto as quatro fotos são paisagem (proporção 0,83–1,78). O `object-fit: cover` cobrindo a seção inteira exigia uma escala de até 1,88×, deixando visível menos de 14% da largura da foto `duas-capitais-poa-noturna.webp` — na prática, uma faixa vertical irreconhecível, agravada pelo zoom do Ken Burns (6.2). Tablet (768 px) e desktop (1280/1920 px) já ficavam legíveis e não apresentavam o problema.
+
+**Correção aplicada em `index.html`:**
+- A camada fotográfica (`div` com as 4 `.dc-slide`) passou a usar a classe `.dc-photo-band` em vez de `absolute inset-0`.
+- Em telas ≥ 640 px o comportamento não muda (faixa cobre a seção inteira, `inset: 0`).
+- Em telas < 640 px a faixa passa a ter **proporção própria 4:5** (não mais a altura inteira da seção) e um degradê inferior para `rgba(4,27,36,…)` (`pool-abyss`, a cor de fundo da seção), para que o restante do texto repouse sobre a cor sólida sem corte abrupto.
+- Nenhuma alteração em tablet/desktop, no JS de rotação/Ken Burns ou nos critérios de acessibilidade.
+
+**Validação (Playwright, Chromium):**
+- [x] Mobile 375 px: faixa fotográfica com 468,75 px de altura (antes: 1517,5 px/seção inteira); largura visível da foto por imagem entre ~45% e ~95%, a depender da orientação (antes: ~14% no pior caso).
+- [x] Mobile 390 px: comportamento equivalente (487,6 px de faixa).
+- [x] Tablet 768 px e desktop 1280/1920 px: faixa continua cobrindo a seção inteira, sem diferença visual em relação à validação anterior.
+- [x] Sem overflow horizontal em nenhum dos 5 viewports (`docScrollWidth === docClientWidth`).
+- [x] Rotação de slides e Ken Burns continuam funcionando no mobile (slide 0 → 1 após ~8–10 s; `transform: scale` evolui de 1,0 para ~1,117 antes da troca).
+- [x] `prefers-reduced-motion` no mobile: `dc-animating` ausente, slide permanece em 0.
+- [x] Prints antes/depois confirmam a foto legível (skyline reconhecível) no lugar da mancha escura ampliada, com transição suave para a cor sólida no restante da seção.
+- [x] Sem erros de console.
+
+**Pendência:** aguardando o solicitante revisar os prints antes do commit desta rodada.
