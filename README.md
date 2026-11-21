@@ -5,3 +5,8 @@ Aplicação web minimalista inspirada em `fernandasardaimoveis.com.br`, mantendo
 ## Como publicar na Vercel
 1. Extraia o arquivo `poa_floripa_vercel_deploy.zip`.
 2. Suba a pasta na [Vercel](https://vercel.com/new) ou execute `npx vercel --prod`.
+
+
+
+teste
+
