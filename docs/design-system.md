@@ -51,7 +51,7 @@
 4. **Hover elegante** em cards (`.sarda-card`, zoom da imagem).
 5. **Mosaico de 5 fotos** no modal (`.auxiliadora-mosaic`).
 6. **Pulso do WhatsApp** (`.wa-official-pulse`).
-7. **Slideshow editorial contido** (`#duasCapitais`): crossfade de 800 ms, ciclo de 6 s e zoom máximo de 1,03; todas as camadas usam clipping e o modo de movimento reduzido permanece estático.
+7. **Slideshow editorial estilo Hero com molduras Glassmorphism** (`#duasCapitais`): crossfade de 1100 ms, ciclo de 6,5 s, movimento Ken Burns contínuo (`slowKenBurns`, 24s), pílula flutuante seletora de cidade e textos organizados em 4 blocos com moldura translúcida (`backdrop-filter: blur(12px)`), flutuação contínua (`.dc-float-wrap*`) e elevação no hover (`.dc-glass-card:hover`).
 
 ## Princípios
 Minimalismo, muito espaço em branco, bordas finas `#EAEAEA`, sombras suaves, sem excesso de cor.

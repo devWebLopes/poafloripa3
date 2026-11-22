@@ -101,9 +101,10 @@
       will-change: transform;
     }
 
-    /* Efeito 1b: slideshow editorial contido da seção "Duas Capitais" */
+    /* Efeito 1b: slideshow editorial estilo Hero com molduras glassmorphism na seção "Duas Capitais" */
     #duasCapitais {
       position: relative;
+      width: 100%;
       max-width: 100%;
       overflow: hidden;
     }
@@ -113,6 +114,7 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
+      background-color: #041B24;
     }
     .dc-slide {
       position: absolute;
@@ -122,7 +124,7 @@
       overflow: hidden;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 800ms ease-in-out;
+      transition: opacity 1100ms ease-in-out;
     }
     .dc-slide.is-active {
       opacity: 1;
@@ -132,75 +134,67 @@
       display: block;
       width: 100%;
       height: 100%;
+      max-width: 100%;
       object-fit: cover;
-      object-position: center;
-      transform: scale(1);
-      transform-origin: center center;
-    }
-    @keyframes dcKenBurnsA {
-      0% { transform: scale(1) translate3d(0, 0, 0); }
-      100% { transform: scale(1.03) translate3d(0, 0, 0); }
-    }
-    @keyframes dcKenBurnsB {
-      0% { transform: scale(1.03) translate3d(0, 0, 0); }
-      100% { transform: scale(1) translate3d(0, 0, 0); }
-    }
-    .dc-animating .dc-slide.is-active .dc-media {
-      animation: dcKenBurnsA 6s ease-in-out forwards;
+      object-position: center 45%;
+      animation: slowKenBurns 24s ease-in-out infinite;
       will-change: transform;
     }
-    .dc-animating .dc-slide.is-active[data-dc-motion="b"] .dc-media {
-      animation-name: dcKenBurnsB;
+    .dc-slide[data-dc-motion="b"] .dc-media {
+      animation-direction: alternate-reverse;
     }
-    .dc-paused .dc-slide.is-active .dc-media {
+    .dc-paused .dc-media {
       animation-play-state: paused;
     }
-    .dc-content {
-      box-sizing: border-box;
-      width: 100%;
-      padding-top: 72px;
-      padding-bottom: 72px;
+    /* Véu equilibrado estilo Hero para destacar as fotos de fundo e garantir leitura nos cards com blur */
+    .dc-veil {
+      background:
+        radial-gradient(circle at 50% 25%, rgba(4, 27, 36, 0.30) 0%, rgba(4, 27, 36, 0.62) 100%),
+        linear-gradient(180deg, rgba(4, 27, 36, 0.58) 0%, rgba(4, 27, 36, 0.36) 45%, rgba(4, 27, 36, 0.68) 100%);
     }
-    @media (min-width: 640px) {
-      .dc-content {
-        padding-top: 88px;
-        padding-bottom: 88px;
-      }
+    /* Molduras Glassmorphism (blur leve, flutuação sutil e hover elegante) */
+    .dc-glass-card {
+      position: relative;
+      background: rgba(7, 42, 54, 0.46);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 2px;
+      box-shadow: 0 18px 40px -20px rgba(4, 27, 36, 0.55);
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.35s ease,
+                  background-color 0.35s ease;
     }
-    @media (min-width: 1024px) {
-      #duasCapitais .dc-content {
-        display: flex;
-        max-width: 1200px;
-        min-height: clamp(680px, 62vw, 800px);
-        flex-direction: column;
-        justify-content: center;
-        padding-top: 36px;
-        padding-bottom: 36px;
-      }
-      #duasCapitaisTitle {
-        max-width: 28ch;
-        font-size: 52px;
-        line-height: 1.02;
-      }
-      #duasCapitais .dc-intro {
-        max-width: 80ch;
-        margin-top: 20px;
-        font-size: 16px;
-        line-height: 1.6;
-      }
-      #duasCapitais .dc-columns {
-        margin-top: 24px;
-        gap: 32px;
-        line-height: 1.45;
-      }
-      #duasCapitais .dc-closing {
-        max-width: 100%;
-        margin-top: 24px;
-        line-height: 1.45;
-      }
-      #duasCapitais .dc-controls {
-        margin-top: 24px;
-      }
+    .dc-glass-card:hover {
+      transform: translateY(-6px);
+      background: rgba(7, 42, 54, 0.62);
+      border-color: #00B4D8;
+      box-shadow: 0 24px 48px -18px rgba(0, 180, 216, 0.28),
+                  0 12px 32px -12px rgba(4, 27, 36, 0.65);
+    }
+    .dc-glass-card--accent {
+      border-left: 3px solid var(--pool-primary);
+      background: rgba(7, 42, 54, 0.54);
+    }
+    /* Flutuação contínua em wrapper externo para não conflitar com o hover do card */
+    @keyframes dcCardFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+    }
+    .dc-float-wrap {
+      animation: dcCardFloat 7s ease-in-out infinite;
+    }
+    .dc-float-wrap-delayed {
+      animation: dcCardFloat 8s ease-in-out 1.6s infinite;
+    }
+    .dc-float-wrap-slow {
+      animation: dcCardFloat 8.5s ease-in-out 0.8s infinite;
+    }
+    .dc-float-wrap:hover,
+    .dc-float-wrap-delayed:hover,
+    .dc-float-wrap-slow:hover {
+      animation-play-state: paused;
     }
     .dc-dot {
       display: inline-flex;
@@ -216,52 +210,19 @@
       display: block;
       width: 28px;
       height: 3px;
-      background: rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.38);
       transition: background-color 0.3s ease, transform 0.3s ease;
     }
     .dc-dot:hover span {
-      background: rgba(255, 255, 255, 0.65);
+      background: rgba(255, 255, 255, 0.75);
     }
     .dc-dot[aria-pressed="true"] span {
-      background: #FFFFFF;
-      transform: scaleY(1.5);
-    }
-    .dc-closing {
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-left: 2px solid var(--pool-primary);
-      background-color: rgba(7, 42, 54, 0.6);
-    }
-    /* Véu responsivo: denso sob o texto, mais aberto à direita no desktop */
-    .dc-veil {
-      background:
-        linear-gradient(180deg, rgba(4, 27, 36, 0.55) 0%, rgba(4, 27, 36, 0) 16%, rgba(4, 27, 36, 0) 74%, rgba(4, 27, 36, 0.6) 100%),
-        linear-gradient(90deg, rgba(4, 27, 36, 0.88) 0%, rgba(4, 27, 36, 0.78) 55%, rgba(4, 27, 36, 0.76) 82%, rgba(4, 27, 36, 0.28) 100%);
-    }
-    @media (max-width: 1023px) {
-      .dc-veil {
-        background:
-          linear-gradient(180deg, rgba(4, 27, 36, 0.45) 0%, rgba(4, 27, 36, 0) 14%, rgba(4, 27, 36, 0) 76%, rgba(4, 27, 36, 0.55) 100%),
-          linear-gradient(90deg, rgba(4, 27, 36, 0.85) 0%, rgba(4, 27, 36, 0.78) 100%);
-      }
+      background: #00B4D8;
+      transform: scaleY(1.6);
     }
     .dc-dot:focus-visible {
       outline: 2px solid #FFFFFF;
       outline-offset: 2px;
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .dc-slide,
-      .dc-dot span {
-        transition: none;
-      }
-      .dc-media,
-      .dc-animating .dc-slide.is-active .dc-media {
-        animation: none;
-        transform: none;
-      }
-      /* especificidade acima do utilitário .flex do Tailwind */
-      #duasCapitais .dc-controls {
-        display: none;
-      }
     }
 
     /* Efeito 2: Itens Flutuantes Sutis */
@@ -670,72 +631,118 @@
 
   <!-- =========================================================================
        SEÇÃO EDITORIAL "DE PORTO ALEGRE A FLORIANÓPOLIS" (RF-08 / ALT-08)
-       D-07: texto sempre visível. D-09: depois de "Sobre Nós".
-       D-08: fundo fotográfico alternado com as imagens licenciadas (PRD seção 5).
+       D-07: texto sempre visível em molduras translúcidas (glassmorphism) com blur,
+       efeitos flutuantes e hover. D-08: fundo fotográfico alternado estilo Hero.
        ========================================================================= -->
-  <section id="duasCapitais" aria-labelledby="duasCapitaisTitle" class="relative overflow-hidden bg-pool-abyss border-t border-white/10">
-    <!-- Fundo fotográfico alternado: POA → Floripa → POA → Floripa -->
+  <section id="duasCapitais" aria-labelledby="duasCapitaisTitle" class="relative overflow-hidden bg-pool-abyss border-t border-white/10 py-16 sm:py-20 lg:py-24">
+    <!-- Fundo fotográfico alternado em movimento (POA → Floripa → POA → Floripa) -->
     <div class="dc-photo-band" aria-hidden="true">
-      <div class="dc-slide is-active" data-dc-slide data-dc-motion="a">
-        <img src="assets/img/duas-capitais-poa-noturna.webp" alt="" aria-hidden="true" class="dc-media" width="1440" height="808" loading="lazy" decoding="async" />
+      <div class="dc-slide is-active" data-dc-slide data-dc-city="poa" data-dc-motion="a">
+        <img src="assets/img/duas-capitais-poa-noturna.webp" alt="" aria-hidden="true" class="dc-media" width="1440" height="808" decoding="async" />
       </div>
-      <div class="dc-slide" data-dc-slide data-dc-motion="b">
-        <img src="assets/img/duas-capitais-floripa-praia.webp" alt="" aria-hidden="true" class="dc-media" width="1057" height="1280" loading="lazy" decoding="async" />
+      <div class="dc-slide" data-dc-slide data-dc-city="floripa" data-dc-motion="b">
+        <img src="assets/img/duas-capitais-floripa-praia.webp" alt="" aria-hidden="true" class="dc-media" width="1057" height="1280" decoding="async" />
       </div>
-      <div class="dc-slide" data-dc-slide data-dc-motion="a">
-        <img src="assets/img/duas-capitais-poa-gasometro.webp" alt="" aria-hidden="true" class="dc-media" width="1072" height="1181" loading="lazy" decoding="async" />
+      <div class="dc-slide" data-dc-slide data-dc-city="poa" data-dc-motion="a">
+        <img src="assets/img/duas-capitais-poa-gasometro.webp" alt="" aria-hidden="true" class="dc-media" width="1072" height="1181" decoding="async" />
       </div>
-      <div class="dc-slide" data-dc-slide data-dc-motion="b">
-        <img src="assets/img/duas-capitais-floripa-ponte.webp" alt="" aria-hidden="true" class="dc-media" width="1125" height="740" loading="lazy" decoding="async" />
+      <div class="dc-slide" data-dc-slide data-dc-city="floripa" data-dc-motion="b">
+        <img src="assets/img/duas-capitais-floripa-ponte.webp" alt="" aria-hidden="true" class="dc-media" width="1125" height="740" decoding="async" />
       </div>
     </div>
 
-    <!-- Véu constante + gradiente responsivo para legibilidade em qualquer fundo -->
-    <div class="absolute inset-0 dc-veil" aria-hidden="true"></div>
+    <!-- Véu equilibrado para valorizar a fotografia em movimento e manter contraste AA -->
+    <div class="absolute inset-0 dc-veil pointer-events-none" aria-hidden="true"></div>
 
-    <div class="dc-content relative z-10 max-w-[1120px] mx-auto px-4 sm:px-8">
+    <div class="dc-content relative z-10 max-w-6xl mx-auto px-4 sm:px-8">
 
-      <div class="max-w-4xl">
+      <!-- Cabeçalho estilo Hero com Pílula Flutuante de Seleção Rápida -->
+      <div class="flex flex-col items-center text-center">
+        <div class="architectural-float inline-flex items-center gap-3 bg-white/15 backdrop-blur-md border border-white/25 px-4 py-1.5 rounded-full mb-4">
+          <button type="button" data-dc-city-btn="poa" class="text-[11px] uppercase tracking-[0.18em] text-white font-semibold transition-opacity">
+            Porto Alegre
+          </button>
+          <span class="text-white/40" aria-hidden="true">•</span>
+          <button type="button" data-dc-city-btn="floripa" class="text-[11px] uppercase tracking-[0.18em] text-white/70 hover:text-white transition-opacity">
+            Florianópolis
+          </button>
+        </div>
+
         <span class="text-[11px] uppercase tracking-[0.22em] text-pool-light font-semibold">
           Porto Alegre &amp; Florianópolis
         </span>
-        <h2 id="duasCapitaisTitle" class="font-serif text-4xl sm:text-5xl lg:text-[56px] text-white font-normal mt-3 leading-[1.08] max-w-[21ch] text-balance">
+
+        <h2 id="duasCapitaisTitle" class="font-serif text-3xl sm:text-5xl text-white font-normal mt-2 leading-[1.1] max-w-3xl text-balance">
           De Porto Alegre a Florianópolis: Duas Capitais, uma História de Qualidade de Vida
         </h2>
       </div>
 
-      <p class="dc-intro mt-7 max-w-[68ch] text-base sm:text-lg text-white/90 font-light leading-relaxed">
-        A conexão entre Porto Alegre e Florianópolis vai muito além da proximidade geográfica — ela está escrita na própria origem das duas cidades. Ambas foram moldadas pelo espírito pioneiro e acolhedor dos colonizadores açorianos no século XVIII, que encontraram nas águas do Lago Guaíba e nas baías da Ilha de Santa Catarina o cenário perfeito para construir comunidades prósperas, vibrantes e intimamente ligadas à natureza.
-      </p>
-
-      <div class="dc-columns mt-10 max-w-5xl grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 text-sm sm:text-base text-white/80 font-light leading-relaxed">
-        <p>
-          Com o passar dos séculos, cada capital desenvolveu sua própria vocação, criando uma complementaridade única no Sul do Brasil. Porto Alegre, fundada oficialmente em 1772 como o histórico Porto dos Casais, consolidou-se como uma metrópole dinâmica, referência em negócios, cultura, gastronomia e infraestrutura urbana. Seus bairros tradicionais, parques arborizados e a renovada Orla do Guaíba oferecem o equilíbrio ideal entre o ritmo cosmopolita e o bem-estar.
-        </p>
-        <p class="lg:border-l lg:border-white/20 lg:pl-12">
-          Florianópolis, por sua vez, transformou sua herança açoriana em um dos destinos mais desejados do país para viver e investir. Conhecida como a Ilha da Magia, une praias paradisíacas, segurança e alto índice de desenvolvimento humano a um polo tecnológico e de inovação em constante expansão, atraindo famílias e investidores em busca de qualidade de vida junto ao mar.
-        </p>
+      <!-- Bloco 1: Moldura de Introdução com Blur, Flutuação Sutil e Hover -->
+      <div class="mt-8 sm:mt-10 dc-float-wrap">
+        <div class="dc-glass-card p-6 sm:p-7">
+          <p class="dc-intro text-sm sm:text-base text-white/95 font-light leading-relaxed">
+            A conexão entre Porto Alegre e Florianópolis vai muito além da proximidade geográfica — ela está escrita na própria origem das duas cidades. Ambas foram moldadas pelo espírito pioneiro e acolhedor dos colonizadores açorianos no século XVIII, que encontraram nas águas do Lago Guaíba e nas baías da Ilha de Santa Catarina o cenário perfeito para construir comunidades prósperas, vibrantes e intimamente ligadas à natureza.
+          </p>
+        </div>
       </div>
 
-      <p class="dc-closing mt-10 max-w-3xl text-sm sm:text-base text-white/90 font-light leading-relaxed backdrop-blur-sm p-5 sm:p-6">
-        Hoje, o fluxo entre gaúchos e catarinenses é mais forte do que nunca — seja para morar, veranear ou diversificar investimentos imobiliários. Na Poa Floripa Imóveis, conhecemos profundamente a essência e as oportunidades desses dois mercados. Conectamos você às melhores opções de imóveis nas duas capitais para que você possa viver ou investir exatamente onde a sua história pedir.
-      </p>
+      <!-- Blocos 2 e 3: Duas Colunas em Molduras com Blur, Flutuação Desfasada e Hover -->
+      <div class="dc-columns mt-5 sm:mt-6 grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6">
+        <div class="dc-float-wrap-slow h-full">
+          <div class="dc-glass-card p-6 sm:p-7 h-full flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-3 pb-3 mb-3 border-b border-white/15">
+                <span class="text-[10px] uppercase tracking-[0.2em] text-pool font-semibold">Capital Gaúcha • 1772</span>
+                <span class="w-1.5 h-1.5 rounded-full bg-pool" aria-hidden="true"></span>
+              </div>
+              <p class="text-sm sm:text-base text-white/90 font-light leading-relaxed">
+                Com o passar dos séculos, cada capital desenvolveu sua própria vocação, criando uma complementaridade única no Sul do Brasil. Porto Alegre, fundada oficialmente em 1772 como o histórico Porto dos Casais, consolidou-se como uma metrópole dinâmica, referência em negócios, cultura, gastronomia e infraestrutura urbana. Seus bairros tradicionais, parques arborizados e a renovada Orla do Guaíba oferecem o equilíbrio ideal entre o ritmo cosmopolita e o bem-estar.
+              </p>
+            </div>
+          </div>
+        </div>
 
-      <!-- Controles discretos: seleção manual e pausa/reprodução -->
-      <div class="dc-controls mt-10 sm:mt-12 flex flex-wrap items-center gap-x-6 gap-y-3">
-        <div class="flex items-center" role="group" aria-label="Escolher imagem de fundo">
+        <div class="dc-float-wrap-delayed h-full">
+          <div class="dc-glass-card p-6 sm:p-7 h-full flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-3 pb-3 mb-3 border-b border-white/15">
+                <span class="text-[10px] uppercase tracking-[0.2em] text-pool font-semibold">Ilha da Magia • SC</span>
+                <span class="w-1.5 h-1.5 rounded-full bg-pool" aria-hidden="true"></span>
+              </div>
+              <p class="text-sm sm:text-base text-white/90 font-light leading-relaxed">
+                Florianópolis, por sua vez, transformou sua herança açoriana em um dos destinos mais desejados do país para viver e investir. Conhecida como a Ilha da Magia, une praias paradisíacas, segurança e alto índice de desenvolvimento humano a um polo tecnológico e de inovação em constante expansão, atraindo famílias e investidores em busca de qualidade de vida junto ao mar.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bloco 4: Moldura de Fechamento com Destaque Lateral Azul Piscina, Blur e Hover -->
+      <div class="mt-5 sm:mt-6 dc-float-wrap">
+        <div class="dc-glass-card dc-glass-card--accent dc-closing p-6 sm:p-7">
+          <p class="text-sm sm:text-base text-white/95 font-light leading-relaxed">
+            Hoje, o fluxo entre gaúchos e catarinenses é mais forte do que nunca — seja para morar, veranear ou diversificar investimentos imobiliários. Na Poa Floripa Imóveis, conhecemos profundamente a essência e as oportunidades desses dois mercados. Conectamos você às melhores opções de imóveis nas duas capitais para que você possa viver ou investir exatamente onde a sua história pedir.
+          </p>
+        </div>
+      </div>
+
+      <!-- Controles discretos: seleção manual dos 4 slides, legenda ativa e pausa/reprodução -->
+      <div class="dc-controls mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-3">
+        <div class="flex items-center bg-white/10 backdrop-blur-md border border-white/20 px-3 py-1 rounded-full" role="group" aria-label="Escolher imagem de fundo">
           <button type="button" class="dc-dot" data-dc-dot="0" aria-label="Imagem 1: Porto Alegre noturna" aria-pressed="true"><span></span></button>
           <button type="button" class="dc-dot" data-dc-dot="1" aria-label="Imagem 2: Praia de Florianópolis" aria-pressed="false"><span></span></button>
           <button type="button" class="dc-dot" data-dc-dot="2" aria-label="Imagem 3: Usina do Gasômetro ao entardecer" aria-pressed="false"><span></span></button>
           <button type="button" class="dc-dot" data-dc-dot="3" aria-label="Imagem 4: Ponte Hercílio Luz à noite" aria-pressed="false"><span></span></button>
         </div>
-        <span class="hidden sm:block h-px w-10 bg-white/25" aria-hidden="true"></span>
-        <button type="button" data-dc-toggle aria-label="Pausar imagens de fundo" aria-pressed="false" class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/30 text-white hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition-colors">
-          <svg data-dc-icon="pause" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <span id="dcActiveSlideLabel" class="text-[11px] uppercase tracking-[0.18em] text-white/80 font-medium">
+          01 / 04 • Porto Alegre Noturna
+        </span>
+        <button type="button" data-dc-toggle aria-label="Pausar imagens de fundo" aria-pressed="false" class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/10 backdrop-blur-md border border-white/25 text-white hover:bg-white/20 hover:border-pool focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition-colors">
+          <svg data-dc-icon="pause" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <rect x="6" y="4" width="4" height="16" rx="1"></rect>
             <rect x="14" y="4" width="4" height="16" rx="1"></rect>
           </svg>
-          <svg data-dc-icon="play" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="hidden">
+          <svg data-dc-icon="play" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="hidden">
             <path d="M8 5.14v13.72a1 1 0 0 0 1.54.84l10.29-6.86a1 1 0 0 0 0-1.68L9.54 4.3A1 1 0 0 0 8 5.14Z"></path>
           </svg>
         </button>
@@ -1510,65 +1517,72 @@
       setHeroBackdrop(currentHeroIndex === 0 ? 1 : 0);
     }, 11000);
 
-    // Seção Duas Capitais: fundo fotográfico alternado com controle acessível
+    // Seção Duas Capitais: fundo fotográfico alternado estilo Hero com controles e seleção rápida
     (function initDuasCapitais() {
-      const SLIDE_DURATION = 6000;
+      const SLIDE_DURATION = 6500;
+      const SLIDE_LABELS = [
+        '01 / 04 • Porto Alegre Noturna',
+        '02 / 04 • Praia de Florianópolis',
+        '03 / 04 • Usina do Gasômetro (POA)',
+        '04 / 04 • Ponte Hercílio Luz (Floripa)'
+      ];
       const section = document.getElementById('duasCapitais');
       if (!section) return;
 
       const slides = Array.from(section.querySelectorAll('[data-dc-slide]'));
       const dots = Array.from(section.querySelectorAll('[data-dc-dot]'));
+      const cityBtns = Array.from(section.querySelectorAll('[data-dc-city-btn]'));
       const toggle = section.querySelector('[data-dc-toggle]');
+      const labelEl = document.getElementById('dcActiveSlideLabel');
       if (!slides.length || !toggle) return;
 
       const pauseIcon = toggle.querySelector('[data-dc-icon="pause"]');
       const playIcon = toggle.querySelector('[data-dc-icon="play"]');
-      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
       let current = 0;
       let timer = null;
       let paused = false;
-      let inView = false;
-      let switchRequest = 0;
+
+      // Pré-carregar todas as imagens do carrossel para transição imediata sem travar
+      slides.forEach((slide) => {
+        const img = slide.querySelector('img');
+        if (img && img.src) {
+          const preload = new Image();
+          preload.src = img.src;
+        }
+      });
 
       const clearTimer = () => {
         if (timer !== null) {
-          clearTimeout(timer);
+          clearInterval(timer);
           timer = null;
         }
       };
 
-      const waitForImage = (slide) => {
-        const img = slide.querySelector('img');
-        if (!img) return Promise.resolve();
-        const decoded = () => (img.decode ? img.decode().catch(() => {}) : Promise.resolve());
-        if (img.complete && img.naturalWidth) return decoded();
-        return new Promise((resolve) => {
-          img.addEventListener('load', () => decoded().then(resolve), { once: true });
-          img.addEventListener('error', resolve, { once: true });
-        });
-      };
-
       const paint = (index) => {
+        const activeCity = slides[index]?.getAttribute('data-dc-city') || 'poa';
         slides.forEach((slide, i) => slide.classList.toggle('is-active', i === index));
         dots.forEach((dot, i) => dot.setAttribute('aria-pressed', String(i === index)));
+        cityBtns.forEach((btn) => {
+          const isMatch = btn.getAttribute('data-dc-city-btn') === activeCity;
+          btn.className = isMatch
+            ? 'text-[11px] uppercase tracking-[0.18em] text-white font-semibold transition-opacity'
+            : 'text-[11px] uppercase tracking-[0.18em] text-white/70 hover:text-white transition-opacity';
+        });
+        if (labelEl && SLIDE_LABELS[index]) {
+          labelEl.textContent = SLIDE_LABELS[index];
+        }
       };
 
-      const show = (index, { automatic = false } = {}) => {
-        const request = ++switchRequest;
-        if (index === current) return Promise.resolve();
-        return waitForImage(slides[index]).then(() => {
-          if (request !== switchRequest) return;
-          if (automatic && (paused || !inView || document.hidden || reducedMotion.matches)) return;
-          current = index;
-          paint(index);
-        });
+      const show = (index) => {
+        current = (index + slides.length) % slides.length;
+        paint(current);
       };
 
       const schedule = () => {
         clearTimer();
-        if (paused || !inView || document.hidden || reducedMotion.matches) return;
-        timer = window.setTimeout(() => {
-          show((current + 1) % slides.length, { automatic: true }).then(schedule);
+        if (paused || document.hidden) return;
+        timer = window.setInterval(() => {
+          show(current + 1);
         }, SLIDE_DURATION);
       };
 
@@ -1586,35 +1600,25 @@
         }
       };
 
-      const setInView = (value) => {
-        inView = value;
-        section.classList.toggle('dc-animating', value && !reducedMotion.matches);
-        if (value) {
-          schedule();
-        } else {
-          clearTimer();
-        }
-      };
-
       dots.forEach((dot, index) => {
         dot.addEventListener('click', () => {
-          clearTimer();
-          show(index).then(() => {
-            if (!paused) schedule();
-          });
+          show(index);
+          if (!paused) schedule();
+        });
+      });
+
+      cityBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const targetCity = btn.getAttribute('data-dc-city-btn');
+          const nextIdx = slides.findIndex((s, i) => i !== current && s.getAttribute('data-dc-city') === targetCity);
+          const fallbackIdx = slides.findIndex((s) => s.getAttribute('data-dc-city') === targetCity);
+          const chosen = nextIdx !== -1 ? nextIdx : (fallbackIdx !== -1 ? fallbackIdx : 0);
+          show(chosen);
+          if (!paused) schedule();
         });
       });
 
       toggle.addEventListener('click', () => setPaused(!paused));
-
-      if ('IntersectionObserver' in window) {
-        const observer = new IntersectionObserver((entries) => {
-          setInView(entries.some((entry) => entry.isIntersecting));
-        }, { threshold: 0.15 });
-        observer.observe(section);
-      } else {
-        setInView(true);
-      }
 
       document.addEventListener('visibilitychange', () => {
         if (document.hidden) {
@@ -1624,20 +1628,8 @@
         }
       });
 
-      const handleMotionPreference = () => {
-        section.classList.toggle('dc-animating', inView && !reducedMotion.matches);
-        if (reducedMotion.matches) {
-          clearTimer();
-          show(0);
-        } else {
-          schedule();
-        }
-      };
-      if (reducedMotion.addEventListener) {
-        reducedMotion.addEventListener('change', handleMotionPreference);
-      }
-
       paint(0);
+      schedule();
     })();
 
     // Modal de Detalhes (Mosaico 5 Fotos Estilo Auxiliadora Predial)
